@@ -1,0 +1,1 @@
+/home/craig/Dev/projects/carp/carp_android/app/build/intermediates/cxx/Debug/g5y6qw5q/obj/local/armeabi-v7a

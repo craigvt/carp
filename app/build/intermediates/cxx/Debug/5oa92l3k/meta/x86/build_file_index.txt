@@ -1,0 +1,2 @@
+/home/craig/Dev/projects/carp/carp_two/app/jni/Android.mk
+/home/craig/Dev/projects/carp/carp_two/app/jni/Application.mk
