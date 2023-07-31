@@ -15,30 +15,28 @@ int main(int argc, char* args[])
         SDL_Window *window = init_window();
         SDL_Renderer *renderer = init_renderer(window);
 
-        bool running    = true;
-        int fish_active = 0;
-        int fish_cap    = 3;
-        int frame_count = 0;
-        int key_frame   = 1;
-        SDL_Event e;
+        bool running = true;
+        uint8_t fish_active = 0;
+        uint8_t fish_cap    = 3;
+        uint8_t frame_count = 0;
+        uint8_t key_frame   = 1;
+
+        Input input;
 
         SDL_Texture *bg_tex   = create_texture(renderer, "play_bg.png", 1, 255);
         SDL_Texture *fish_tex = create_texture(renderer, "fish_atlas.png", 1, 255);
 
-        Object bg = create_object(0, 0, get_offset_width(), 0, BG_W, BG_H);
+        Object bg = create_object(0, 0, -get_offset_width(), 0, BG_W, BG_H);
+        LOGI("BG X: %d", bg.dst_rect.x);
 
         Fish_arr fish = init_fish();
 
         while (running) {
 
-                while (SDL_PollEvent(&e)) {
-                        if (e.type == SDL_QUIT) {
-                                running = false;
-                        }              
-                }
+                get_input(&running, &input);
 
                 fish_spawn(&fish_active, &key_frame, &fish_cap, &fish);
-                fish_update(&fish_active, &key_frame, &fish);
+                fish_update(&fish_active, &key_frame, &fish, &input);
 
                 SDL_RenderClear(renderer);
                 SDL_RenderCopy(renderer, bg_tex, &bg.src_rect, &bg.dst_rect);
@@ -76,8 +74,8 @@ SDL_Window *init_window(void)
 
 SDL_Renderer *init_renderer(SDL_Window *window)
 {
-        float    scale_factor;
-        int      scaled_width;
+        float scale_factor;
+        int scaled_width;
         SDL_Rect bounds;
 
         SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_ACCELERATED);
@@ -93,17 +91,46 @@ SDL_Renderer *init_renderer(SDL_Window *window)
 
 int get_offset_width(void)
 {
-        float    scale_factor;
-        int      scaled_width, offset;
+        float scale_factor;
+        int scaled_width;
+        int offset;
         SDL_Rect bounds;
 
         SDL_GetDisplayBounds(0, &bounds);
         scale_factor = (float)bounds.h / NATIVE_H;
 
         scaled_width = NATIVE_W * scale_factor;
-        offset = (scaled_width - bounds.w) / 2;
+
+        if (scaled_width > bounds.w) {
+                offset = (scaled_width - bounds.w) / 2; 
+        }
+        if (scaled_width < bounds.w) {
+                offset = (bounds.w - scaled_width) / 2; 
+        }
+
+        LOGI("Device W: %d Device H: %d", bounds.w, bounds.h);
+        LOGI("Scale Factor: %f", scale_factor);
+        LOGI("Scaled Width: %d", scaled_width);
+        LOGI("Offset: %d", offset);
 
         return offset;
+}
+
+Input *get_input(bool *running, Input *input)
+{
+        while (SDL_PollEvent(&input->event)) { 
+                if (input->event.type == SDL_QUIT) {
+                        *running = false;   
+                } 
+                if (input->event.type == SDL_FINGERDOWN) {
+                        input->touched = true;
+                        input->touch_loc.x = NATIVE_W * input->event.tfinger.x;
+                        input->touch_loc.y = NATIVE_H * input->event.tfinger.y;
+                        LOGI("Touch X: %d Touch Y: %d", input->touch_loc.x, input->touch_loc.y);
+                } 
+        }
+
+        return input;
 }
 
 SDL_Texture *create_texture(SDL_Renderer *renderer, const char *str, SDL_BlendMode blendMode, Uint8 alpha)
@@ -129,8 +156,8 @@ Fish_arr init_fish(void)
 {
         Fish_arr fish;
 
-        int count = 0;
-        for (int i = 0; i < MAX_FISH; i++) {
+        uint8_t count = 0;
+        for (uint8_t i = 0; i < MAX_FISH; i++) {
                 fish.fish_arr[i].id = count;
                 fish.fish_arr[i].active = false;
                 count++;
@@ -139,22 +166,22 @@ Fish_arr init_fish(void)
         return fish;
 }
 
-void fish_spawn(int *fish_active, int *key_frame, int *fish_cap, Fish_arr *fish)
+void fish_spawn(uint8_t *fish_active, uint8_t *key_frame, uint8_t *fish_cap, Fish_arr *fish)
 {
         if (*fish_active < *fish_cap) {
 
-                int open_slot;
-                for (int i = 0; i < MAX_FISH; i++) {
+                uint8_t open_slot;
+                for (uint8_t i = 0; i < MAX_FISH; i++) {
                         if (fish->fish_arr[i].active == false) {
                                 open_slot = fish->fish_arr[i].id;
                                 break;
                         }                      
                 }
 
-                int fish_type = 1;
-                int fish_dir  = rand() % 2;
-                int fish_speed = rand() % (10 + 1 - 3) + 3;
-                int fish_y_axis = rand() % (2000 + 1 - 50) + 50;
+                uint8_t  fish_type   = 1;
+                uint8_t  fish_dir    = rand() % 2;
+                uint8_t  fish_speed  = rand() % (10 + 1 - 3) + 3;
+                uint16_t fish_y_axis = rand() % (2000 + 1 - 50) + 50;
                 int src_x, src_y, src_w, src_h;
                 int dst_x, dst_y;
 
@@ -163,16 +190,16 @@ void fish_spawn(int *fish_active, int *key_frame, int *fish_cap, Fish_arr *fish)
                         if (fish_dir == 0) {
                                 src_x = 0;
                                 src_y = 0;
-                                src_w = 640;
-                                src_h = 256;
+                                src_w = 420;
+                                src_h = 150;
                                 dst_x = -src_w;
                                 dst_y = fish_y_axis;  
                         } 
                         if (fish_dir == 1) {
                                 src_x = 0;
-                                src_y = 256;
-                                src_w = 640;
-                                src_h = 256;
+                                src_y = 150;
+                                src_w = 420;
+                                src_h = 150;
                                 dst_x = BG_W + src_w;
                                 dst_y = fish_y_axis;
                         }
@@ -181,16 +208,16 @@ void fish_spawn(int *fish_active, int *key_frame, int *fish_cap, Fish_arr *fish)
                         if (fish_dir == 0) {
                                 src_x = 0;
                                 src_y = 0;
-                                src_w = 640;
-                                src_h = 256;
+                                src_w = 420;
+                                src_h = 150;
                                 dst_x = -src_w;
                                 dst_y = fish_y_axis;  
                         } 
                         if (fish_dir == 1) {
                                 src_x = 0;
-                                src_y = 256;
-                                src_w = 640;
-                                src_h = 256;
+                                src_y = 150;
+                                src_w = 420;
+                                src_h = 150;
                                 dst_x = BG_W + src_w;
                                 dst_y = fish_y_axis;
                         }
@@ -211,17 +238,25 @@ void fish_spawn(int *fish_active, int *key_frame, int *fish_cap, Fish_arr *fish)
 
 void fish_render(SDL_Renderer *renderer, SDL_Texture *fish_tex, Fish_arr *fish)
 {
-        for (int i = 0; i < MAX_FISH; i++) {
+        for (uint8_t i = 0; i < MAX_FISH; i++) {
                 if (fish->fish_arr[i].active == true) {
                         SDL_RenderCopy(renderer, fish_tex, &fish->fish_arr[i].src, &fish->fish_arr[i].dst);
                 }
         }
 }
 
-void fish_update(int *fish_active, int *key_frame, Fish_arr *fish)
+void fish_update(uint8_t *fish_active, uint8_t *key_frame, Fish_arr *fish, Input *input)
 {
-        for (int i = 0; i < MAX_FISH; i++) {
+        for (uint8_t i = 0; i < MAX_FISH; i++) {
                 if (fish->fish_arr[i].active == true) {
+                        if (input->touched == true) {
+                                if ((input->touch_loc.x > fish->fish_arr[i].dst.x) && (input->touch_loc.x < fish->fish_arr[i].dst.x + fish->fish_arr[i].dst.w)
+                                        && (input->touch_loc.y > fish->fish_arr[i].dst.y) && (input->touch_loc.y < fish->fish_arr[i].dst.y + fish->fish_arr[i].dst.h)) {
+                                                fish->fish_arr[i].active = false;
+                                                input->touched = false;
+                                                (*fish_active)--;
+                                }
+                        }
                         if (*key_frame > fish->fish_arr[i].key_frame | *key_frame < fish->fish_arr[i].key_frame) {
                                 if (*key_frame < 5) {
                                         fish->fish_arr[i].src.x = fish->fish_arr[i].src.x + fish->fish_arr[i].src.w;
@@ -237,8 +272,7 @@ void fish_update(int *fish_active, int *key_frame, Fish_arr *fish)
                                 if (fish->fish_arr[i].dst.x > BG_W) {
                                         fish->fish_arr[i].active = false;
                                         (*fish_active)--;    
-                                }
-                                
+                                }                              
                         }
                         if (fish->fish_arr[i].dir == 1) {     
                                 fish->fish_arr[i].dst.x = fish->fish_arr[i].dst.x - fish->fish_arr[i].speed;
