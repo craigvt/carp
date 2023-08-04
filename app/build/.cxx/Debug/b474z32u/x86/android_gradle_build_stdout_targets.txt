@@ -1,3 +1,4 @@
 make: Nothing to be done for 'SDL2'.
 make: Nothing to be done for 'SDL2_image'.
-make: Nothing to be done for 'main'.
+[x86] Compile        : main <= background.c
+[x86] SharedLibrary  : libmain.so

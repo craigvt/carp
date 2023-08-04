@@ -1,0 +1,3 @@
+syn keyword CTagsGlobalVariable input parsing_controllers standard_guid_pattern filename controllers split_pattern controller_guids conditionals output invalid_controllers
+syn keyword CTagsFunction write_controllers save_controller find_element
+

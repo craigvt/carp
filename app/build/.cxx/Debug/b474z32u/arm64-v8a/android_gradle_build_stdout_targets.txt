@@ -1,3 +1,4 @@
 make: Nothing to be done for 'SDL2'.
 make: Nothing to be done for 'SDL2_image'.
-make: Nothing to be done for 'main'.
+[arm64-v8a] Compile        : main <= background.c
+[arm64-v8a] SharedLibrary  : libmain.so

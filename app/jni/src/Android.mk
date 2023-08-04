@@ -9,7 +9,7 @@ SDL_PATH := ../SDL
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/$(SDL_PATH)/include $(LOCAL_PATH)/../SDL_image
 
 # Add your application source files here...
-LOCAL_SRC_FILES := carp.c
+LOCAL_SRC_FILES := background.c entity.c game.c input.c main.c render.c
 
 LOCAL_SHARED_LIBRARIES := SDL2 SDL2_image
 
