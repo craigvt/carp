@@ -13,6 +13,8 @@ typedef struct {
         game_state new_state;
         uint8_t    frame_count;
         uint8_t    key_frame;
+        Uint64     start;
+        Uint64     end;
 } game_context;
 
 game_context *game_get_context(void);
@@ -22,3 +24,4 @@ void game_state_manager(void);
 void game_update(void);
 void game_render(void);
 void game_frame_count(void);
+void game_fps_cap(void);

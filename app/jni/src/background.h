@@ -2,6 +2,13 @@
 
 #include "common.h"
 
+#define SCHOOL_W 64
+#define SCHOOL_H 48
+#define GROUP_W  32
+#define GROUP_H  16
+#define SOLO_W   16
+#define SOLO_H   16
+
 typedef struct {
         SDL_Texture *texture;
         SDL_Rect     src;
@@ -9,55 +16,57 @@ typedef struct {
 } play_bg;
 
 typedef struct {
-        SDL_Texture *texture;
-        SDL_Rect     src;
-        SDL_Rect     dst;
-        uint8_t      key_frame;
-} bubbles;
-
-typedef struct {
-        SDL_Texture *texture;
-        SDL_Rect     src;
-        SDL_Rect     dst;
-        uint8_t      key_frame;
-        bool         active;
-        uint8_t      direction;
-        uint8_t      speed;
-        uint16_t     timer;
-} shark;
-
-typedef struct {
-        SDL_Texture *texture;
-        SDL_Rect     src;
-        SDL_Rect     dst;
-        uint8_t      key_frame;
-        bool         active;
-        uint8_t      direction;
-        uint8_t      speed;
-        uint16_t     timer;
-} school;
-
-typedef struct {
-        bool active;
-        uint8_t  id;
-        uint8_t  dir;
-        uint8_t  speed;
-        uint8_t  key_frame;
         SDL_Rect src;
         SDL_Rect dst;
-} solofish;
+        uint8_t  speed;
+} school1;
+
+typedef struct {
+        SDL_Rect src;
+        SDL_Rect dst;
+        uint8_t  speed;
+} school2;
+
+typedef struct {
+        SDL_Rect src;
+        SDL_Rect dst;
+        uint8_t  speed;
+} fish_group1;
+
+typedef struct {
+        SDL_Rect src;
+        SDL_Rect dst;
+        uint8_t  speed;
+} fish_group2;
+
+typedef struct {
+        SDL_Rect src;
+        SDL_Rect dst;
+        uint8_t  speed;
+} fish_solo1;
+
+typedef struct {
+        SDL_Rect src;
+        SDL_Rect dst;
+        uint8_t  speed;
+} fish_solo2;
+
+typedef struct {
+        SDL_Rect src;
+        SDL_Rect dst;
+        uint8_t  speed;
+} fish_solo3;
 
 typedef struct {
         SDL_Texture *texture;
-        solofish solo_arr[MAX_BGFISH];
-} solofish_grp;
-
-typedef struct {
-        play_bg  play_bg;
-        bubbles  bubbles;
-        shark    shark;
-        school   school;
-        solofish solofish;
+        play_bg      play_bg;
+        school1      school1;
+        school2      school2;
+        fish_group1  fish_group1;
+        fish_group2  fish_group2;
+        fish_solo1   fish_solo1;
+        fish_solo2   fish_solo2;
+        fish_solo3   fish_solo3;
 } background_context;
 
 background_context *background_get_context(void);
@@ -65,7 +74,3 @@ void background_init_play(void);
 void background_update_play(void);
 void background_render_play(void);
 void background_destroy_play(void);
-void background_spawn_check(void);
-void background_update_bubbles(void);
-void background_update_shark(void);
-void background_update_school(void);

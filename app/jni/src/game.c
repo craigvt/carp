@@ -18,9 +18,15 @@ void game(void)
         srand(time(NULL));
 
         render_init();
+
         game_init();
 
         while (ctx.running) {
+
+                ctx.start = SDL_GetPerformanceCounter();
+
+                LOGI("Frame Count: %d", ctx.frame_count);
+                LOGI("Key Frame: %d", ctx.key_frame);
 
                 input_poll_events();
 
@@ -29,6 +35,10 @@ void game(void)
                 game_render();
 
                 game_frame_count();
+
+                ctx.end = SDL_GetPerformanceCounter();
+             
+                game_fps_cap();
         }
 
         render_destroy();
@@ -38,6 +48,8 @@ void game_init(void)
 {
         ctx.running     = true;
         ctx.new_state   = PLAY;
+        ctx.frame_count = 0;
+        ctx.key_frame   = 1;
         game_state_manager();
 }
 
@@ -95,13 +107,22 @@ void game_frame_count(void)
         ctx.frame_count++; 
 
         if (ctx.frame_count >= 15) {
-                if (ctx.key_frame < 5) {
-                        ctx.key_frame++;
+
+                switch (ctx.key_frame) {
+                case 1:
+                        ctx.key_frame = 2;
                         ctx.frame_count = 0;
-                }
-                if (ctx.key_frame == 5) {
+                        break;
+                case 2:
                         ctx.key_frame = 1;
                         ctx.frame_count = 0;
+                        break;
                 }
-        }
+        }       
+}
+
+void game_fps_cap(void) 
+{
+        float elapsedMS = (ctx.end - ctx.start) / (float)SDL_GetPerformanceFrequency() * 1000.0f;
+        SDL_Delay(floor(33.3333333333f - elapsedMS));
 }

@@ -15,13 +15,14 @@ void render_init(void)
 
         ctx.window = SDL_CreateWindow("Carp", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, NATIVE_W, NATIVE_H, SDL_WINDOW_FULLSCREEN | SDL_WINDOW_OPENGL);
 
-        ctx.render = SDL_CreateRenderer(ctx.window, -1, SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_ACCELERATED);
-        SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1");
+        ctx.render = SDL_CreateRenderer(ctx.window, -1, SDL_RENDERER_ACCELERATED);
+        SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
 
         /* set render scaling */
         SDL_GetDisplayBounds(0, &ctx.bounds);
         ctx.scale_factor = (float)ctx.bounds.h / NATIVE_H;
         SDL_RenderSetScale(ctx.render, ctx.scale_factor, ctx.scale_factor);
+        SDL_RenderSetIntegerScale(ctx.render, true);
 
         /* get offset width */
         ctx.scaled_width = NATIVE_W * ctx.scale_factor;
@@ -32,6 +33,12 @@ void render_init(void)
         if (ctx.scaled_width < ctx.bounds.w) {
                 ctx.offset = (ctx.bounds.w - ctx.scaled_width) / 2; 
         }
+
+        LOGI("Device Width: %d", ctx.bounds.w);
+        LOGI("Device Height: %d", ctx.bounds.h);
+        LOGI("Scaled Width: %d", ctx.scaled_width);
+        LOGI("Scale factor: %f", ctx.scale_factor);
+        LOGI("Offset Width: %d", ctx.offset);
 }
 
 void render_destroy(void)
