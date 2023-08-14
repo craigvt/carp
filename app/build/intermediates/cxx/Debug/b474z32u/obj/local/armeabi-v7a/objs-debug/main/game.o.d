@@ -57,7 +57,8 @@
   /home/craig/Dev/projects/carp/app/jni/src/render.h \
   /home/craig/Dev/projects/carp/app/jni/src/input.h \
   /home/craig/Dev/projects/carp/app/jni/src/background.h \
-  /home/craig/Dev/projects/carp/app/jni/src/entity.h
+  /home/craig/Dev/projects/carp/app/jni/src/entity.h \
+  /home/craig/Dev/projects/carp/app/jni/src/ui.h
 
 /home/craig/Dev/projects/carp/app/jni/src/game.h:
 
@@ -174,3 +175,5 @@
 /home/craig/Dev/projects/carp/app/jni/src/background.h:
 
 /home/craig/Dev/projects/carp/app/jni/src/entity.h:
+
+/home/craig/Dev/projects/carp/app/jni/src/ui.h:

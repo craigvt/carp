@@ -10,29 +10,160 @@ entity_context *entity_get_context(void)
         return &ctx;
 }
 
-void entity_init_fish(void)
+void entity_init_play(void)
 {
         render_context *render_ctx = render_get_context();
 
-        ctx.fish_texture = IMG_LoadTexture(render_ctx->render, "fish_atlas.png");
+        ctx.texture = IMG_LoadTexture(render_ctx->render, "fish_atlas.png");
 
-        uint8_t count = 0;
+        uint8_t fish_count = 0;
         for (uint8_t i = 0; i < MAX_FISH; i++) {
                 ctx.fish_arr[i].active = false;
-                ctx.fish_arr[i].id = count;
-                count++;
+                ctx.fish_arr[i].id = fish_count;
+                fish_count++;
         }
 
-        ctx.fish_cap    = 3;
-        ctx.fish_active = 0;
-        ctx.fish_caught = 0;
+        uint8_t lane_count = 0;
+        for (uint8_t i = 0; i < LANES; i++) {
+                ctx.lanes[i].active = false;
+                ctx.lanes[i].id = lane_count;
+                lane_count++;
+        }
+
+        ctx.fish_cap           = 10;
+        ctx.fish_active        = 0;
+        ctx.fish_spawn_rate    = 30;
+        ctx.fish_spawn_timer   = 0;
+        ctx.turtle_spawn_rate  = 30;
+        ctx.turtle_spawn_timer = 0;
+        ctx.turtle_active      = false;
+        ctx.turtles_caught     = 0;
+}
+
+void entity_update_play(void)
+{
+        entity_spawn_fish(); 
+        entity_spawn_turtle();
+        entity_update_fish();
+        entity_update_turtle();
+}
+
+void entity_render_play(void)
+{
+        render_context *render_ctx = render_get_context();
+
+        for (uint8_t i = 0; i < MAX_FISH; i++) {
+                if (ctx.fish_arr[i].active == true) {
+                        SDL_RenderCopy(render_ctx->render, ctx.texture, &ctx.fish_arr[i].src, &ctx.fish_arr[i].dst);
+                }
+        }
+
+        if (ctx.turtle_active) {
+                SDL_RenderCopy(render_ctx->render, ctx.texture, &ctx.turtle.src, &ctx.turtle.dst);
+        }
+}
+
+void entity_destroy_play(void)
+{
+        SDL_DestroyTexture(ctx.texture);
+
+        for (uint8_t i = 0; i < MAX_FISH; i++) {
+                ctx.fish_arr[i].active    = false;
+                ctx.fish_arr[i].id        = 0;
+                ctx.fish_arr[i].type      = 0;
+                ctx.fish_arr[i].direction = 0;
+                ctx.fish_arr[i].speed     = 0;
+                ctx.fish_arr[i].src       = (SDL_Rect){0, 0, 0, 0};
+                ctx.fish_arr[i].dst       = (SDL_Rect){0, 0, 0, 0};
+        }
+
+        ctx.turtle.src = (SDL_Rect){0, 0, 0, 0};
+        ctx.turtle.dst = (SDL_Rect){0, 0, 0, 0};
+}
+
+void entity_spawn_turtle(void)
+{
+        if (!ctx.turtle_active) {
+
+                ctx.turtle.direction   = rand() % 2;
+                ctx.turtle.speed       = rand() % (2 + 1 - 1) + 1;
+                ctx.turtle.dying       = false;
+                ctx.turtle.death_count = 0;
+
+                int spawn_y;
+                uint8_t lane;
+                entity_spawn_randomizer(&spawn_y, &lane);
+
+                if (ctx.turtle.direction == 0) {
+                        ctx.turtle.src    = (SDL_Rect){0, 192, TURTLE_W, TURTLE_H};
+                        ctx.turtle.dst    = (SDL_Rect){0 - TURTLE_W, spawn_y, TURTLE_W, TURTLE_H};
+                        ctx.turtle.lane   = lane;
+                        ctx.turtle_active = true;
+                }
+                if (ctx.turtle.direction == 1) {
+                        ctx.turtle.src = (SDL_Rect){0, 208, TURTLE_W, TURTLE_H};
+                        ctx.turtle.dst = (SDL_Rect){PLAYBG_W, spawn_y, TURTLE_W, TURTLE_H};
+                        ctx.turtle.lane   = lane;
+                        ctx.turtle_active = true;
+                }
+        }
+}
+
+void entity_update_turtle(void)
+{
+        if (ctx.turtle_active) {
+
+                input_context *input_ctx = input_get_context();
+                game_context *game_ctx   = game_get_context();
+
+                uint8_t active_lane = ctx.turtle.lane;
+
+                if (ctx.turtle.dying) {
+                        ctx.turtle.death_count++;
+                        if (ctx.turtle.death_count > 3) {
+                                ctx.turtle_active = false;
+                                ctx.lanes[active_lane].active = false;
+                        }
+                }
+
+                if (ctx.turtle.direction == 0) {
+                        ctx.turtle.dst.x = ctx.turtle.dst.x + ctx.turtle.speed;
+
+                        if (ctx.turtle.dst.x > PLAYBG_W) {
+                                ctx.lanes[active_lane].active = false;
+                                ctx.turtle_active = false;  
+                        }     
+                }
+
+                if (ctx.turtle.direction == 1) {
+                        ctx.turtle.dst.x = ctx.turtle.dst.x - ctx.turtle.speed;
+
+                        if (ctx.turtle.dst.x < 0 - TURTLE_W) {
+                                ctx.lanes[active_lane].active = false;
+                                ctx.turtle_active = false;  
+                        }     
+                }
+
+                if (!ctx.turtle.dying) {
+                        if (game_ctx->key_frame == 1) {
+                                ctx.turtle.src.x = 0;
+                        }   
+                        if (game_ctx->key_frame == 2) {
+                                ctx.turtle.src.x = ctx.turtle.src.w;
+                        }
+                } 
+
+                if (ctx.turtle.dying) {
+                        ctx.turtle.src.x = ctx.turtle.src.w * 2;
+                }
+        }
 }
 
 void entity_spawn_fish(void)
 {      
-        if (ctx.fish_active < ctx.fish_cap) {
+        ctx.fish_spawn_timer++;
 
-                game_context *game_ctx = game_get_context();
+        if (ctx.fish_active < ctx.fish_cap && ctx.fish_spawn_timer > ctx.fish_spawn_rate) {
 
                 uint8_t open_slot;
                 for (uint8_t i = 0; i < MAX_FISH; i++) {
@@ -42,124 +173,240 @@ void entity_spawn_fish(void)
                         }                      
                 }
 
-                uint8_t  fish_type   = 1;
-                uint8_t  fish_dir    = rand() % 2;
-                uint8_t  fish_speed  = rand() % (10 + 1 - 3) + 3;
-                uint16_t fish_y_axis = rand() % (2000 + 1 - 50) + 50;
-                int src_x, src_y, src_w, src_h;
-                int dst_x, dst_y;
+                int spawn_y;
+                uint8_t lane;
+                entity_spawn_randomizer(&spawn_y, &lane);
 
-                switch (fish_type) {           
+                ctx.fish_arr[open_slot].type        = rand() % (8 + 1 - 1) + 1;
+                ctx.fish_arr[open_slot].direction   = rand() % 2;
+                ctx.fish_arr[open_slot].speed       = rand() % (2 + 1 - 1) + 1;
+                ctx.fish_arr[open_slot].lane        = lane;
+                ctx.fish_arr[open_slot].active      = true;
+                ctx.fish_arr[open_slot].dying       = false;
+                ctx.fish_arr[open_slot].death_count = 0;
+
+                switch (ctx.fish_arr[open_slot].type) {           
                 case 1:
-                        if (fish_dir == 0) {
-                                src_x = 0;
-                                src_y = 0;
-                                src_w = 420;
-                                src_h = 150;
-                                dst_x = -src_w;
-                                dst_y = fish_y_axis;  
+                        if (ctx.fish_arr[open_slot].direction == 0) {
+                                ctx.fish_arr[open_slot].src = (SDL_Rect){0, 0, BIGFISH_W, FISH_H};
+                                ctx.fish_arr[open_slot].dst = (SDL_Rect){0 - BIGFISH_W, spawn_y, BIGFISH_W, FISH_H};
                         } 
-                        if (fish_dir == 1) {
-                                src_x = 0;
-                                src_y = 150;
-                                src_w = 420;
-                                src_h = 150;
-                                dst_x = PLAYBG_W + src_w;
-                                dst_y = fish_y_axis;
+                        if (ctx.fish_arr[open_slot].direction == 1) {
+                                ctx.fish_arr[open_slot].src = (SDL_Rect){0, 16, BIGFISH_W, FISH_H};
+                                ctx.fish_arr[open_slot].dst = (SDL_Rect){PLAYBG_W, spawn_y, BIGFISH_W, FISH_H};
                         }
-                        break;  
+                        break;
+                case 2:
+                        if (ctx.fish_arr[open_slot].direction == 0) {
+                                ctx.fish_arr[open_slot].src = (SDL_Rect){0, 32, BIGFISH_W, FISH_H};
+                                ctx.fish_arr[open_slot].dst = (SDL_Rect){0 - BIGFISH_W, spawn_y, BIGFISH_W, FISH_H};
+                        } 
+                        if (ctx.fish_arr[open_slot].direction == 1) {
+                                ctx.fish_arr[open_slot].src = (SDL_Rect){0, 48, BIGFISH_W, FISH_H};
+                                ctx.fish_arr[open_slot].dst = (SDL_Rect){PLAYBG_W, spawn_y, BIGFISH_W, FISH_H};
+                        }
+                        break;
+                case 3:
+                        if (ctx.fish_arr[open_slot].direction == 0) {
+                                ctx.fish_arr[open_slot].src = (SDL_Rect){0, 64, BIGFISH_W, FISH_H};
+                                ctx.fish_arr[open_slot].dst = (SDL_Rect){0 - BIGFISH_W, spawn_y, BIGFISH_W, FISH_H};
+                        } 
+                        if (ctx.fish_arr[open_slot].direction == 1) {
+                                ctx.fish_arr[open_slot].src = (SDL_Rect){0, 80, BIGFISH_W, FISH_H};
+                                ctx.fish_arr[open_slot].dst = (SDL_Rect){PLAYBG_W, spawn_y, BIGFISH_W, FISH_H};
+                        }
+                        break;
+                case 4:
+                        if (ctx.fish_arr[open_slot].direction == 0) {
+                                ctx.fish_arr[open_slot].src = (SDL_Rect){0, 96, BIGFISH_W, FISH_H};
+                                ctx.fish_arr[open_slot].dst = (SDL_Rect){0 - BIGFISH_W, spawn_y, BIGFISH_W, FISH_H};
+                        } 
+                        if (ctx.fish_arr[open_slot].direction == 1) {
+                                ctx.fish_arr[open_slot].src = (SDL_Rect){0, 112, BIGFISH_W, FISH_H};
+                                ctx.fish_arr[open_slot].dst = (SDL_Rect){PLAYBG_W, spawn_y, BIGFISH_W, FISH_H};
+                        }
+                        break;
+                case 5:
+                        if (ctx.fish_arr[open_slot].direction == 0) {
+                                ctx.fish_arr[open_slot].src = (SDL_Rect){0, 128, SMOLFISH_W, FISH_H};
+                                ctx.fish_arr[open_slot].dst = (SDL_Rect){0 - SMOLFISH_W, spawn_y, SMOLFISH_W, FISH_H};
+                        } 
+                        if (ctx.fish_arr[open_slot].direction == 1) {
+                                ctx.fish_arr[open_slot].src = (SDL_Rect){0, 144, SMOLFISH_W, FISH_H};
+                                ctx.fish_arr[open_slot].dst = (SDL_Rect){PLAYBG_W, spawn_y, SMOLFISH_W, FISH_H};
+                        }
+                        break;
+                case 6:
+                        if (ctx.fish_arr[open_slot].direction == 0) {
+                                ctx.fish_arr[open_slot].src = (SDL_Rect){0, 160, SMOLFISH_W, FISH_H};
+                                ctx.fish_arr[open_slot].dst = (SDL_Rect){0 - SMOLFISH_W, spawn_y, SMOLFISH_W, FISH_H};
+                        } 
+                        if (ctx.fish_arr[open_slot].direction == 1) {
+                                ctx.fish_arr[open_slot].src = (SDL_Rect){0, 176, SMOLFISH_W, FISH_H};
+                                ctx.fish_arr[open_slot].dst = (SDL_Rect){PLAYBG_W, spawn_y, SMOLFISH_W, FISH_H};
+                        }
+                        break;
+                case 7:
+                        if (ctx.fish_arr[open_slot].direction == 0) {
+                                ctx.fish_arr[open_slot].src = (SDL_Rect){48, 128, SMOLFISH_W, FISH_H};
+                                ctx.fish_arr[open_slot].dst = (SDL_Rect){0 - SMOLFISH_W, spawn_y, SMOLFISH_W, FISH_H};
+                        } 
+                        if (ctx.fish_arr[open_slot].direction == 1) {
+                                ctx.fish_arr[open_slot].src = (SDL_Rect){48, 144, SMOLFISH_W, FISH_H};
+                                ctx.fish_arr[open_slot].dst = (SDL_Rect){PLAYBG_W, spawn_y, SMOLFISH_W, FISH_H};
+                        }
+                        break;
+                case 8:
+                        if (ctx.fish_arr[open_slot].direction == 0) {
+                                ctx.fish_arr[open_slot].src = (SDL_Rect){48, 160, SMOLFISH_W, FISH_H};
+                                ctx.fish_arr[open_slot].dst = (SDL_Rect){0 - SMOLFISH_W, spawn_y, SMOLFISH_W, FISH_H};
+                        } 
+                        if (ctx.fish_arr[open_slot].direction == 1) {
+                                ctx.fish_arr[open_slot].src = (SDL_Rect){48, 176, SMOLFISH_W, FISH_H};
+                                ctx.fish_arr[open_slot].dst = (SDL_Rect){PLAYBG_W, spawn_y, SMOLFISH_W, FISH_H};
+                        }
+                        break;
                 }
 
-                ctx.fish_arr[open_slot].type       = fish_type;
-                ctx.fish_arr[open_slot].dir        = fish_dir;
-                ctx.fish_arr[open_slot].speed      = fish_speed;
-                ctx.fish_arr[open_slot].src        = (SDL_Rect){src_x, src_y, src_w, src_h};
-                ctx.fish_arr[open_slot].dst        = (SDL_Rect){dst_x, dst_y, src_w, src_h};
-                ctx.fish_arr[open_slot].active     = true;
-                ctx.fish_arr[open_slot].key_frame  = game_ctx->key_frame;
-
                 ctx.fish_active++;
+                ctx.fish_spawn_timer = 0;
         }
 }
 
 void entity_update_fish(void)
 {
-        input_context *input_ctx  = input_get_context();
-        game_context  *game_ctx   = game_get_context();
+        input_context *input_ctx = input_get_context();
+        game_context *game_ctx   = game_get_context();
 
         for (uint8_t i = 0; i < MAX_FISH; i++) {
 
                 if (ctx.fish_arr[i].active == true) {
 
-                        // check for touched fish
-                        if (input_ctx->action_id == TOUCH) {
-                                if ((input_ctx->touch_loc.x > ctx.fish_arr[i].dst.x) && (input_ctx->touch_loc.x < ctx.fish_arr[i].dst.x + ctx.fish_arr[i].dst.w)
-                                        && (input_ctx->touch_loc.y > ctx.fish_arr[i].dst.y) && (input_ctx->touch_loc.y < ctx.fish_arr[i].dst.y + ctx.fish_arr[i].dst.h)) {
-                                                ctx.fish_arr[i].active = false;
-                                                ctx.fish_active--;
-                                }
-                        }
+                        uint8_t active_lane = ctx.fish_arr[i].lane;
 
-                        // update keyframe
-                        if (game_ctx->key_frame > ctx.fish_arr[i].key_frame | game_ctx->key_frame < ctx.fish_arr[i].key_frame) {
-                                if (game_ctx->key_frame < 5) {
-                                        ctx.fish_arr[i].src.x = ctx.fish_arr[i].src.x + ctx.fish_arr[i].src.w;
-                                        ctx.fish_arr[i].key_frame = game_ctx->key_frame;
-                                }
-                                if (game_ctx->key_frame == 1) {
-                                        ctx.fish_arr[i].src.x = 0;
-                                        ctx.fish_arr[i].key_frame = game_ctx->key_frame;
-                                }                              
-                        }
-
-                        // update fish if moving dir 0
-                        if (ctx.fish_arr[i].dir == 0) {
-                                ctx.fish_arr[i].dst.x = ctx.fish_arr[i].dst.x + ctx.fish_arr[i].speed;
-
-                                // destroy if off screen
-                                if (ctx.fish_arr[i].dst.x > PLAYBG_W) {
+                        if (ctx.fish_arr[i].dying) {
+                                ctx.fish_arr[i].death_count++;
+                                if (ctx.fish_arr[i].death_count > 3) {
                                         ctx.fish_arr[i].active = false;
-                                        ctx.fish_active--;   
-                                }                              
-                        }
-                        
-                        // update fish if moving dir 1
-                        if (ctx.fish_arr[i].dir == 1) {     
-                                ctx.fish_arr[i].dst.x = ctx.fish_arr[i].dst.x - ctx.fish_arr[i].speed;
-
-                                // destroy if off screen
-                                if (ctx.fish_arr[i].dst.x < 0 - ctx.fish_arr[i].src.w) {
-                                        ctx.fish_arr[i].active = false;
+                                        ctx.lanes[active_lane].active = false;
                                         ctx.fish_active--;
                                 }
-                        }             
+                        }
+
+                        if (ctx.fish_arr[i].direction == 0) {
+                                ctx.fish_arr[i].dst.x = ctx.fish_arr[i].dst.x + ctx.fish_arr[i].speed;
+
+                                if (ctx.fish_arr[i].dst.x > PLAYBG_W) {
+                                        ctx.fish_arr[i].active = false;
+                                        ctx.lanes[active_lane].active = false;
+                                        ctx.fish_active--;   
+                                }     
+                        }
+
+                        if (ctx.fish_arr[i].direction == 1) {     
+                                ctx.fish_arr[i].dst.x = ctx.fish_arr[i].dst.x - ctx.fish_arr[i].speed;
+
+                                if (ctx.fish_arr[i].dst.x < 0 - ctx.fish_arr[i].src.w) {
+                                        ctx.fish_arr[i].active = false;
+                                        ctx.lanes[active_lane].active = false;
+                                        ctx.fish_active--;
+                                }
+                        }
+
+                        if (!ctx.fish_arr[i].dying) {
+                                if (game_ctx->key_frame == 1) {
+                                        if (ctx.fish_arr[i].type == 1 || ctx.fish_arr[i].type == 3 || ctx.fish_arr[i].type == 5 || ctx.fish_arr[i].type == 7) {
+                                                ctx.fish_arr[i].src.x = 0;
+                                        }
+                                        if (ctx.fish_arr[i].type == 2 || ctx.fish_arr[i].type == 4 || ctx.fish_arr[i].type == 6 || ctx.fish_arr[i].type == 8) {
+                                                ctx.fish_arr[i].src.x = ctx.fish_arr[i].src.w;
+                                        }                                    
+                                }   
+                                if (game_ctx->key_frame == 2) {
+                                        if (ctx.fish_arr[i].type == 1 || ctx.fish_arr[i].type == 3 || ctx.fish_arr[i].type == 5 || ctx.fish_arr[i].type == 7) {
+                                                ctx.fish_arr[i].src.x = ctx.fish_arr[i].src.w;
+                                        }
+                                        if (ctx.fish_arr[i].type == 2 || ctx.fish_arr[i].type == 4 || ctx.fish_arr[i].type == 6 || ctx.fish_arr[i].type == 8) {
+                                                ctx.fish_arr[i].src.x = 0;
+                                        }
+                                }
+                        }   
+
+                        if (ctx.fish_arr[i].dying) {
+                                ctx.fish_arr[i].src.x = ctx.fish_arr[i].src.w * 2;
+                        }    
                 }
         }
 }
 
-void entity_destroy_fish(void)
+void entity_spawn_randomizer(int *spawn_y, uint8_t *lane)
 {
-        SDL_DestroyTexture(ctx.fish_texture);
+        uint8_t assigned_lane;
 
-        for (uint8_t i = 0; i < MAX_FISH; i++) {
-                ctx.fish_arr[i].active    = false;
-                ctx.fish_arr[i].id        = 0;
-                ctx.fish_arr[i].type      = 0;
-                ctx.fish_arr[i].dir       = 0;
-                ctx.fish_arr[i].speed     = 0;
-                ctx.fish_arr[i].key_frame = 0;
-                ctx.fish_arr[i].src       = (SDL_Rect){0, 0, 0, 0};
-                ctx.fish_arr[i].dst       = (SDL_Rect){0, 0, 0, 0};
-        }
-}
-
-void entity_render_play(void)
-{
-        render_context *render_ctx = render_get_context();
-
-        for (uint8_t i = 0; i < MAX_FISH; i++) {
-                if (ctx.fish_arr[i].active == true) {
-                        SDL_RenderCopy(render_ctx->render, ctx.fish_texture, &ctx.fish_arr[i].src, &ctx.fish_arr[i].dst);
+        for (uint8_t i = 0; i < LANES; i++) {
+                if (ctx.lanes[i].active == false) {
+                        assigned_lane = ctx.lanes[i].id;
+                        ctx.lanes[i].active = true;
+                        break;
                 }
+        }
+
+        switch (assigned_lane) {
+        case 0:  
+                *spawn_y = 48;
+                *lane = 0; 
+                break;
+        case 1:  
+                *spawn_y = 64;
+                *lane = 1; 
+                break;
+        case 2:  
+                *spawn_y = 80;
+                *lane = 2;
+                break;
+        case 3:  
+                *spawn_y = 96;
+                *lane = 3;
+                break;
+        case 4:  
+                *spawn_y = 112;
+                *lane = 4;
+                break;
+        case 5:  
+                *spawn_y = 128;
+                *lane = 5;
+                break;
+        case 6:  
+                *spawn_y = 144; 
+                *lane = 6;
+                break;
+        case 7:  
+                *spawn_y = 160;
+                *lane = 7;
+                break;
+        case 8:  
+                *spawn_y = 176;
+                *lane = 8;
+                break;
+        case 9: 
+                *spawn_y = 192;
+                *lane = 9;
+                break;
+        case 10: 
+                *spawn_y = 208;
+                *lane = 10;
+                break;
+        case 11: 
+                *spawn_y = 224;
+                *lane = 11; 
+                break;
+        case 12: 
+                *spawn_y = 240;
+                *lane = 12; 
+                break;
+        case 13: 
+                *spawn_y = 256;
+                *lane = 13;
+                break;
         }
 }

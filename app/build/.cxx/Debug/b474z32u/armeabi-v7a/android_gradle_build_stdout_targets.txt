@@ -1,4 +1,4 @@
 make: Nothing to be done for 'SDL2'.
 make: Nothing to be done for 'SDL2_image'.
-[armeabi-v7a] Compile thumb  : main <= background.c
+[armeabi-v7a] Compile thumb  : main <= input.c
 [armeabi-v7a] SharedLibrary  : libmain.so

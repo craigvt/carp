@@ -13,7 +13,6 @@
 #define NATIVE_H    320
 #define PLAYBG_W    244
 #define PLAYBG_H    320
-#define MAX_FISH    20
 
 #define  LOG_TAG "carp"
 #define  LOGE(...)  __android_log_print(ANDROID_LOG_ERROR,LOG_TAG,__VA_ARGS__)

@@ -3,6 +3,7 @@
 #include "input.h"
 #include "background.h"
 #include "entity.h"
+#include "ui.h"
 
 static game_context ctx;
 
@@ -13,8 +14,6 @@ game_context *game_get_context(void)
 
 void game(void)
 {
-        LOGI("--------------- Game Start ---------------");
-
         srand(time(NULL));
 
         render_init();
@@ -24,9 +23,6 @@ void game(void)
         while (ctx.running) {
 
                 ctx.start = SDL_GetPerformanceCounter();
-
-                LOGI("Frame Count: %d", ctx.frame_count);
-                LOGI("Key Frame: %d", ctx.key_frame);
 
                 input_poll_events();
 
@@ -58,13 +54,15 @@ void game_state_manager(void)
         switch (ctx.new_state) {
                 case PLAY:
                         background_init_play();
-                        entity_init_fish();
+                        entity_init_play();
+                        ui_init_play();
                         ctx.current_state = PLAY;
                         break;
                 case QUIT:
                         if (ctx.current_state == PLAY) {
                                 background_destroy_play();
-                                entity_destroy_fish();
+                                entity_destroy_play();
+                                ui_destroy_play();
                                 ctx.running = false;
                         }
                         break;
@@ -76,8 +74,8 @@ void game_update(void)
         switch (ctx.current_state) {
                 case PLAY:
                         background_update_play();
-                        entity_spawn_fish(); 
-                        entity_update_fish();             
+                        entity_update_play(); 
+                        ui_update_play();            
                         break;
                 case QUIT:
                         break;
@@ -93,7 +91,8 @@ void game_render(void)
         switch (ctx.current_state) {
                 case PLAY:
                         background_render_play();
-                        entity_render_play();         
+                        entity_render_play();   
+                        ui_render_play();      
                         break;
                 case QUIT:
                         break;
