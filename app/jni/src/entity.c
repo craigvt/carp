@@ -16,6 +16,9 @@ void entity_init_play(void)
 
         ctx.texture = IMG_LoadTexture(render_ctx->render, "fish_atlas.png");
 
+        ctx.pixel_src = (SDL_Rect){1, 214, 1, 1};
+        ctx.pixel_dst = (SDL_Rect){40, 200, 1, 1};
+
         uint8_t fish_count = 0;
         for (uint8_t i = 0; i < MAX_FISH; i++) {
                 ctx.fish_arr[i].active = false;
@@ -51,6 +54,8 @@ void entity_update_play(void)
 void entity_render_play(void)
 {
         render_context *render_ctx = render_get_context();
+
+        SDL_RenderCopy(render_ctx->render, ctx.texture, &ctx.pixel_src, &ctx.pixel_dst);
 
         for (uint8_t i = 0; i < MAX_FISH; i++) {
                 if (ctx.fish_arr[i].active == true) {

@@ -55,7 +55,8 @@
   /home/craig/Dev/projects/carp/app/jni/src/../SDL/include/SDL_misc.h \
   /home/craig/Dev/projects/carp/app/jni/src/../SDL_image/SDL_image.h \
   /home/craig/Dev/projects/carp/app/jni/src/game.h \
-  /home/craig/Dev/projects/carp/app/jni/src/entity.h
+  /home/craig/Dev/projects/carp/app/jni/src/entity.h \
+  /home/craig/Dev/projects/carp/app/jni/src/render.h
 
 /home/craig/Dev/projects/carp/app/jni/src/input.h:
 
@@ -168,3 +169,5 @@
 /home/craig/Dev/projects/carp/app/jni/src/game.h:
 
 /home/craig/Dev/projects/carp/app/jni/src/entity.h:
+
+/home/craig/Dev/projects/carp/app/jni/src/render.h:

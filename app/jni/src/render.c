@@ -21,6 +21,7 @@ void render_init(void)
         /* set render scaling */
         SDL_GetDisplayBounds(0, &ctx.bounds);
         ctx.scale_factor = (float)ctx.bounds.h / NATIVE_H;
+        ctx.scaled_x     = (float)ctx.bounds.w / NATIVE_W;
         SDL_RenderSetScale(ctx.render, ctx.scale_factor, ctx.scale_factor);
         SDL_RenderSetIntegerScale(ctx.render, true);
 
@@ -33,12 +34,6 @@ void render_init(void)
         if (ctx.scaled_width < ctx.bounds.w) {
                 ctx.offset = (ctx.bounds.w - ctx.scaled_width) / 2; 
         }
-
-        LOGI("Device Width: %d", ctx.bounds.w);
-        LOGI("Device Height: %d", ctx.bounds.h);
-        LOGI("Scaled Width: %d", ctx.scaled_width);
-        LOGI("Scale factor: %f", ctx.scale_factor);
-        LOGI("Offset Width: %d", ctx.offset);
 }
 
 void render_destroy(void)

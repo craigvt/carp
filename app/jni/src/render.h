@@ -7,6 +7,7 @@ typedef struct {
         SDL_Renderer *render;
         SDL_Rect      bounds;
         float         scale_factor;
+        float         scaled_x;
         int           scaled_width;
         int           offset;
 } render_context;

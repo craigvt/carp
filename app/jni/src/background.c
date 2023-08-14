@@ -20,7 +20,7 @@ void background_init_play(void)
 
         /* bg */
         ctx.play_bg.src   = (SDL_Rect){0, 0, PLAYBG_W, PLAYBG_H};
-        ctx.play_bg.dst   = (SDL_Rect){-render_ctx->offset, 0, PLAYBG_W, PLAYBG_H};
+        ctx.play_bg.dst   = (SDL_Rect){- render_ctx->offset, 0, PLAYBG_W, PLAYBG_H};
 
         /* school 1 */
         ctx.school1.src   = (SDL_Rect){0, 0, SCHOOL_W, SCHOOL_H};
@@ -127,7 +127,7 @@ void background_render_play(void)
 {
         render_context *render_ctx = render_get_context();
 
-        SDL_RenderCopy(render_ctx->render, ctx.play_bg.texture, &ctx.play_bg.src, &ctx.play_bg.src);
+        SDL_RenderCopy(render_ctx->render, ctx.play_bg.texture, &ctx.play_bg.src, &ctx.play_bg.dst);
         SDL_RenderCopy(render_ctx->render, ctx.texture, &ctx.school1.src, &ctx.school1.dst);
         SDL_RenderCopy(render_ctx->render, ctx.texture, &ctx.school2.src, &ctx.school2.dst);
         SDL_RenderCopy(render_ctx->render, ctx.texture, &ctx.fish_group1.src, &ctx.fish_group1.dst);

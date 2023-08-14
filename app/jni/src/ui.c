@@ -15,7 +15,6 @@ void ui_init_play(void)
         ctx.texture = IMG_LoadTexture(render_ctx->render, "ui_atlas.png");
 
         uint16_t ui_offset = render_ctx->offset / render_ctx->scale_factor;
-        LOGI("UI Offset: %d", ui_offset);
 
         ctx.score.src = (SDL_Rect){0, 0, SCORE_W, SCORE_H};
         ctx.score.dst = (SDL_Rect){22 + ui_offset, 0, SCORE_W, SCORE_H};

@@ -51,6 +51,9 @@ typedef struct {
         uint8_t     turtles_caught;
         uint8_t     turtle_spawn_timer;
         uint8_t     turtle_spawn_rate;
+
+        SDL_Rect      pixel_src;
+        SDL_Rect      pixel_dst;
 } entity_context;
 
 entity_context *entity_get_context(void);
