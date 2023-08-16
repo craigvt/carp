@@ -3,6 +3,7 @@
 #include "game.h"
 
 static background_context ctx;
+render_context *render_ctx;
 
 background_context *background_get_context(void)
 {

@@ -12,7 +12,7 @@ input_context *input_get_context(void)
 
 void input_poll_events(void)
 {
-        game_context *game_ctx     = game_get_context();
+        game_context   *game_ctx   = game_get_context();
         render_context *render_ctx = render_get_context();
      
         while (SDL_PollEvent(&ctx.event)) { 
