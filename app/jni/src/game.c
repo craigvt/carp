@@ -15,9 +15,7 @@ game_context *game_get_context(void)
 void game(void)
 {
         srand(time(NULL));
-
         render_init();
-
         game_init();
 
         while (ctx.running) {

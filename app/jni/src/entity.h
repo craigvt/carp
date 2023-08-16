@@ -2,7 +2,7 @@
 
 #include "common.h"
 
-#define LANES      13
+#define LANES      14
 #define MAX_FISH   20
 #define BIGFISH_W  32
 #define SMOLFISH_W 16
@@ -46,14 +46,12 @@ typedef struct {
         uint8_t     fish_cap;
         uint8_t     fish_spawn_timer;
         uint8_t     fish_spawn_rate;
+        uint16_t    fish_caught;
         turtle      turtle;
         bool        turtle_active;
         uint8_t     turtles_caught;
         uint8_t     turtle_spawn_timer;
         uint8_t     turtle_spawn_rate;
-
-        SDL_Rect      pixel_src;
-        SDL_Rect      pixel_dst;
 } entity_context;
 
 entity_context *entity_get_context(void);
@@ -65,4 +63,5 @@ void entity_spawn_fish(void);
 void entity_spawn_turtle(void);
 void entity_update_fish(void);
 void entity_update_turtle(void);
-void entity_spawn_randomizer(int *spawn_y, uint8_t *lane);
+void entity_turtle_randomizer(int *spawn_y);
+void entity_fish_randomizer(int *spawn_y, uint8_t *lane);

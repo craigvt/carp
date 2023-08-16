@@ -24,12 +24,8 @@ void input_poll_events(void)
                 
                 if (ctx.event.type == SDL_FINGERDOWN) {
 
-                        ctx.touch_loc.x = (NATIVE_W * ctx.event.tfinger.x) + render_ctx->scaled_x;
-                        ctx.touch_loc.y = NATIVE_H * ctx.event.tfinger.y;
-
-                        LOGI("Touch X: %d", ctx.touch_loc.x);
-                        LOGI("Touch Y: %d", ctx.touch_loc.y);
-                        LOGI("Target X: 40, Target Y: 200");
+                        ctx.touch_loc.x = render_ctx->bounds.w * ctx.event.tfinger.x;
+                        ctx.touch_loc.y = render_ctx->bounds.h * ctx.event.tfinger.y;
 
                         input_handle_event();                       
                 }
