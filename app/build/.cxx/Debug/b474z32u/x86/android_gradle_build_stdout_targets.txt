@@ -1,5 +1,4 @@
 make: Nothing to be done for 'SDL2'.
 make: Nothing to be done for 'SDL2_image'.
-[x86] Compile        : main <= game.c
 [x86] Compile        : main <= ui.c
 [x86] SharedLibrary  : libmain.so
