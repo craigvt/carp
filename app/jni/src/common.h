@@ -10,11 +10,6 @@
 #include <stdbool.h>
 #include <android/log.h>
 
-#define NATIVE_W    180
-#define NATIVE_H    320
-#define PLAYBG_W    244
-#define PLAYBG_H    320
-
 #define  LOG_TAG "carp"
 #define  LOGE(...)  __android_log_print(ANDROID_LOG_ERROR,LOG_TAG,__VA_ARGS__)
 #define  LOGW(...)  __android_log_print(ANDROID_LOG_WARN,LOG_TAG,__VA_ARGS__)
