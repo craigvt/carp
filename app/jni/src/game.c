@@ -62,6 +62,16 @@ void game_state_manager(void)
 
                 /* QUIT */
                 case 0:
+                        if (game.state == LOGO) {
+                                background_destroy();
+                                ui_destroy();
+                                game.running = false;
+                        }
+                        if (game.state == TITLE) {
+                                background_destroy();
+                                ui_destroy();
+                                game.running = false;
+                        }
                         if (game.state == PLAY) {
                                 background_destroy();
                                 entity_destroy();

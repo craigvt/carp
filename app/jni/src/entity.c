@@ -9,18 +9,14 @@ void entity_init(void)
 {
         entity.texture = IMG_LoadTexture(render_get_renderer(), "fish_atlas.png");
 
-        int fish_count = 0;
         for (int i = 0; i < MAX_FISH; i++) {
                 entity.fish_arr[i].active = false;
-                entity.fish_arr[i].id = fish_count;
-                fish_count++;
+                entity.fish_arr[i].id = i;
         }
 
-        int lane_count = 0;
         for (int i = 0; i < LANES; i++) {
                 entity.lanes[i].active = false;
-                entity.lanes[i].id = lane_count;
-                lane_count++;
+                entity.lanes[i].id = i;
         }
 
         entity.fish_cap           = 16;
@@ -75,8 +71,7 @@ void entity_end_state(void)
 
 void entity_render(void)
 {
-        if (game_get_state() == PLAY) {
-                
+        if (game_get_state() == PLAY) {              
                 SDL_RenderCopy(render_get_renderer(), entity.texture, &entity.turtle.src, &entity.turtle.dst);
                 for (int i = 0; i < MAX_FISH; i++) {
                         if (entity.fish_arr[i].active) {
@@ -153,6 +148,7 @@ void entity_update_turtle(void)
 
                 if (entity.turtle.dying) {
                         entity.turtle.death_count++;
+                        entity.turtle.src.x = entity.turtle.src.w * 2;
                         if (entity.turtle.death_count > 3) {
                                 entity.turtle_active = false;
                                 entity.turtles_caught++;
@@ -181,10 +177,6 @@ void entity_update_turtle(void)
                                 entity.turtle.src.x = entity.turtle.src.w;
                         }
                 } 
-
-                if (entity.turtle.dying) {
-                        entity.turtle.src.x = entity.turtle.src.w * 2;
-                }
         }
 }
 
