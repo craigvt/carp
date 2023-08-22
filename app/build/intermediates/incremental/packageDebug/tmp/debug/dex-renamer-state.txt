@@ -1,4 +1,4 @@
-#Fri Aug 18 17:08:55 EDT 2023
+#Tue Aug 22 12:48:54 EDT 2023
 base.0=/home/craig/Dev/projects/carp/app/build/intermediates/dex/debug/mergeDexDebug/classes.dex
 renamed.0=classes.dex
 path.0=classes.dex

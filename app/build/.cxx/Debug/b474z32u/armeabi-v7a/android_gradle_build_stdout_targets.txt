@@ -1,5 +1,5 @@
 make: Nothing to be done for 'SDL2'.
 make: Nothing to be done for 'SDL2_image'.
-[armeabi-v7a] Compile thumb  : main <= entity.c
+[armeabi-v7a] Compile thumb  : main <= game.c
 [armeabi-v7a] Compile thumb  : main <= ui.c
 [armeabi-v7a] SharedLibrary  : libmain.so

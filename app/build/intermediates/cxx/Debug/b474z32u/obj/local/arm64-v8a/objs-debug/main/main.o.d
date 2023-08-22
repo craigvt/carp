@@ -1,6 +1,6 @@
 /home/craig/Dev/projects/carp/app/build/intermediates/cxx/Debug/b474z32u/obj/local/arm64-v8a/objs-debug/main/main.o: \
   /home/craig/Dev/projects/carp/app/jni/src/main.c \
-  /home/craig/Dev/projects/carp/app/jni/src/engine/system.h \
+  /home/craig/Dev/projects/carp/app/jni/src/system.h \
   /home/craig/Dev/projects/carp/app/jni/src/common.h \
   /home/craig/Dev/projects/carp/app/jni/src/../SDL/include/SDL.h \
   /home/craig/Dev/projects/carp/app/jni/src/../SDL/include/SDL_main.h \
@@ -55,9 +55,9 @@
   /home/craig/Dev/projects/carp/app/jni/src/../SDL/include/SDL_misc.h \
   /home/craig/Dev/projects/carp/app/jni/src/../SDL_image/SDL_image.h \
   /home/craig/Dev/projects/carp/app/jni/SDL2_ttf/SDL_ttf.h \
-  /home/craig/Dev/projects/carp/app/jni/src/game/game.h
+  /home/craig/Dev/projects/carp/app/jni/src/game.h
 
-/home/craig/Dev/projects/carp/app/jni/src/engine/system.h:
+/home/craig/Dev/projects/carp/app/jni/src/system.h:
 
 /home/craig/Dev/projects/carp/app/jni/src/common.h:
 
@@ -167,4 +167,4 @@
 
 /home/craig/Dev/projects/carp/app/jni/SDL2_ttf/SDL_ttf.h:
 
-/home/craig/Dev/projects/carp/app/jni/src/game/game.h:
+/home/craig/Dev/projects/carp/app/jni/src/game.h:
