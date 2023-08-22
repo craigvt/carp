@@ -1,2 +1,0 @@
-syn keyword CTagsFunction wordwrap_with_bullet_indent wikify open_file wordwrap_paragraphs get_rgba wordwrap usage dewikify_chunk set_rgba output_copyinc output_copyfunc filecopy wordwrap_one_paragraph dewikify wordwrap_atom close_file output_copyfuncname output_copydefs wikify_chunk output_copycore output_copyfunc_c output_copyfunc_h output_copyfunctable
-
