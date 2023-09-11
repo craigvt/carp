@@ -51,6 +51,44 @@
       "output": "/home/craig/Dev/projects/carp/app/build/intermediates/cxx/Debug/b474z32u/obj/local/arm64-v8a/libmain.so",
       "runtimeFiles": []
     },
+    "SDL2_ttf-debug-arm64-v8a": {
+      "artifactName": "SDL2_ttf",
+      "buildCommandComponents": [
+        "/home/craig/Android/Sdk/ndk/21.4.7075529/ndk-build",
+        "NDK_PROJECT_PATH\u003dnull",
+        "APP_BUILD_SCRIPT\u003d/home/craig/Dev/projects/carp/app/jni/Android.mk",
+        "NDK_APPLICATION_MK\u003d/home/craig/Dev/projects/carp/app/jni/Application.mk",
+        "APP_ABI\u003darm64-v8a",
+        "NDK_ALL_ABIS\u003darm64-v8a",
+        "NDK_DEBUG\u003d1",
+        "NDK_OUT\u003d/home/craig/Dev/projects/carp/app/build/intermediates/cxx/Debug/b474z32u/obj",
+        "NDK_LIBS_OUT\u003d/home/craig/Dev/projects/carp/app/build/intermediates/cxx/Debug/b474z32u/lib",
+        "APP_PLATFORM\u003dandroid-16",
+        "/home/craig/Dev/projects/carp/app/build/intermediates/cxx/Debug/b474z32u/obj/local/arm64-v8a/libSDL2_ttf.so"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/home/craig/Dev/projects/carp/app/build/intermediates/cxx/Debug/b474z32u/obj/local/arm64-v8a/libSDL2_ttf.so",
+      "runtimeFiles": []
+    },
+    "freetype-debug-arm64-v8a": {
+      "artifactName": "freetype",
+      "buildCommandComponents": [
+        "/home/craig/Android/Sdk/ndk/21.4.7075529/ndk-build",
+        "NDK_PROJECT_PATH\u003dnull",
+        "APP_BUILD_SCRIPT\u003d/home/craig/Dev/projects/carp/app/jni/Android.mk",
+        "NDK_APPLICATION_MK\u003d/home/craig/Dev/projects/carp/app/jni/Application.mk",
+        "APP_ABI\u003darm64-v8a",
+        "NDK_ALL_ABIS\u003darm64-v8a",
+        "NDK_DEBUG\u003d1",
+        "NDK_OUT\u003d/home/craig/Dev/projects/carp/app/build/intermediates/cxx/Debug/b474z32u/obj",
+        "NDK_LIBS_OUT\u003d/home/craig/Dev/projects/carp/app/build/intermediates/cxx/Debug/b474z32u/lib",
+        "APP_PLATFORM\u003dandroid-16",
+        "/home/craig/Dev/projects/carp/app/build/intermediates/cxx/Debug/b474z32u/obj/local/arm64-v8a/libfreetype.a"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/home/craig/Dev/projects/carp/app/build/intermediates/cxx/Debug/b474z32u/obj/local/arm64-v8a/libfreetype.a",
+      "runtimeFiles": []
+    },
     "SDL2-debug-arm64-v8a": {
       "artifactName": "SDL2",
       "buildCommandComponents": [
@@ -106,6 +144,25 @@
       ],
       "abi": "arm64-v8a",
       "output": "/home/craig/Dev/projects/carp/app/build/intermediates/cxx/Debug/b474z32u/obj/local/arm64-v8a/libcpufeatures.a",
+      "runtimeFiles": []
+    },
+    "harfbuzz-debug-arm64-v8a": {
+      "artifactName": "harfbuzz",
+      "buildCommandComponents": [
+        "/home/craig/Android/Sdk/ndk/21.4.7075529/ndk-build",
+        "NDK_PROJECT_PATH\u003dnull",
+        "APP_BUILD_SCRIPT\u003d/home/craig/Dev/projects/carp/app/jni/Android.mk",
+        "NDK_APPLICATION_MK\u003d/home/craig/Dev/projects/carp/app/jni/Application.mk",
+        "APP_ABI\u003darm64-v8a",
+        "NDK_ALL_ABIS\u003darm64-v8a",
+        "NDK_DEBUG\u003d1",
+        "NDK_OUT\u003d/home/craig/Dev/projects/carp/app/build/intermediates/cxx/Debug/b474z32u/obj",
+        "NDK_LIBS_OUT\u003d/home/craig/Dev/projects/carp/app/build/intermediates/cxx/Debug/b474z32u/lib",
+        "APP_PLATFORM\u003dandroid-16",
+        "/home/craig/Dev/projects/carp/app/build/intermediates/cxx/Debug/b474z32u/obj/local/arm64-v8a/libharfbuzz.a"
+      ],
+      "abi": "arm64-v8a",
+      "output": "/home/craig/Dev/projects/carp/app/build/intermediates/cxx/Debug/b474z32u/obj/local/arm64-v8a/libharfbuzz.a",
       "runtimeFiles": []
     }
   }

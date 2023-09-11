@@ -18,7 +18,7 @@ void background_init(void)
 
                 if (game_get_state() == TITLE) {
                         background.bg.texture = IMG_LoadTexture(render_get_renderer(), "title_bg.png");
-                        background.texture = IMG_LoadTexture(render_get_renderer(), "bg_atlas.png");
+                        background.texture = IMG_LoadTexture(render_get_renderer(), "bg_atlas.png");    
                 }
 
                 if (game_get_state() == PLAY) {

@@ -3,6 +3,7 @@
         "files.associations": {
                 "window.h": "c",
                 "common.h": "c",
-                "input.h": "c"
+                "input.h": "c",
+                "entity.h": "c"
         }
 }

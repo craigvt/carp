@@ -4,7 +4,10 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
-                "\"home/craig/Dev\""
+                "app/jni/SDL/include",
+                "app/jni/SDL2_mixer/include",
+                "app/jni/SDL_image",
+                "app/jni/SDL2_ttf"               
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",

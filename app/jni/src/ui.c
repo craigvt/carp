@@ -3,6 +3,7 @@
 #include "entity.h"
 #include "game.h"
 #include "input.h"
+#include "audio.h"
 
 static struct Ui ui;
 

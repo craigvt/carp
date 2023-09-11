@@ -2,6 +2,7 @@
 #include "render.h"
 #include "input.h"
 #include "game.h"
+#include "audio.h"
 
 static struct Entity entity;
 
@@ -46,7 +47,7 @@ void entity_update(void)
 }
 
 void entity_end_state(void)
-{
+{      
         for (int i = 0; i < MAX_FISH; i++) {
                 if (entity.fish_arr[i].active) {
                         if (!entity.fish_arr[i].dying) {
@@ -64,15 +65,28 @@ void entity_end_state(void)
                 }
         }
 
-        if(entity.fish_active <= 0) {
+        if (entity.turtle.dying) {
+                entity.turtle.death_count++;
+                entity.turtle.src.x = entity.turtle.src.w * 2;
+        }
+
+        if (entity.turtle.death_count >= 3) {
+                entity.turtle_active = false;
+        }
+
+        if (entity.fish_active <= 0) {
                 game_set_new_state(4);
         }
 }
 
 void entity_render(void)
 {
-        if (game_get_state() == PLAY) {              
-                SDL_RenderCopy(render_get_renderer(), entity.texture, &entity.turtle.src, &entity.turtle.dst);
+        if (game_get_state() == PLAY) {     
+
+                if (entity.turtle_active) {
+                        SDL_RenderCopy(render_get_renderer(), entity.texture, &entity.turtle.src, &entity.turtle.dst);
+                }         
+                
                 for (int i = 0; i < MAX_FISH; i++) {
                         if (entity.fish_arr[i].active) {
                                 SDL_RenderCopy(render_get_renderer(), entity.texture, &entity.fish_arr[i].src, &entity.fish_arr[i].dst);
@@ -141,6 +155,7 @@ void entity_update_turtle(void)
                         SDL_Point touch_loc = input_get_touch_loc();
                         SDL_bool collision = SDL_PointInRect(&touch_loc, &entity.turtle.dst);
                         if(collision) {
+                                audio_turtle_click();
                                 entity.turtle.dying = true;
                                 entity.turtle.death_count = 0;
                         }
@@ -313,6 +328,7 @@ void entity_update_fish(void)
                                 SDL_Point touch_loc = input_get_touch_loc();
                                 SDL_bool collision = SDL_PointInRect(&touch_loc, &entity.fish_arr[i].dst);
                                 if(collision) {
+                                        audio_fish_click();
                                         entity.fish_arr[i].dying = true;
                                         entity.fish_arr[i].death_count = 0;
                                 }

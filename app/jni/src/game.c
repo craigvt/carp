@@ -5,6 +5,7 @@
 #include "background.h"
 #include "entity.h"
 #include "ui.h"
+#include "audio.h"
 
 static struct Game game;
 
@@ -31,6 +32,9 @@ void game_loop(void)
                 entity_render(); 
                 ui_render();                     
                 SDL_RenderPresent(render_get_renderer());
+
+                /* manage music */
+                audio_manage_music();
 
                 /* state check */
                 game_state_manager();
@@ -101,34 +105,46 @@ void game_state_manager(void)
                         game.state = TITLE;
                         background_init();
                         ui_init();
+                        audio_init();
                         break;
 
                 /* PLAY */
                 case 3:
                         if (game.state == GAMEOVER) {
+                                Mix_HaltMusic();
+                                audio_title_end();
                                 background_destroy();
                                 ui_destroy();
+                                audio_destroy();
                         }
                         if (game.state == TITLE) {
+                                Mix_HaltMusic();
+                                audio_title_end();
                                 background_destroy();
                                 ui_destroy();
+                                audio_destroy();
                         }
                         game.state = PLAY;
                         background_init();
                         entity_init();
                         ui_init();
+                        audio_init();
                         break;
 
                 /* GAMEOVER */
                 case 4:
                         if (game.state == PLAY) {
+                                Mix_HaltMusic();
+                                audio_play_end();
                                 background_destroy();
                                 entity_destroy();
                                 ui_destroy();
+                                audio_destroy();
                         }
                         game.state = GAMEOVER;
                         background_init();
                         ui_init();
+                        audio_init();
                         break;
                 }
         }

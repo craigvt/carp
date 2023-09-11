@@ -54,13 +54,15 @@
   /home/craig/Dev/projects/carp/app/jni/src/../SDL/include/SDL_locale.h \
   /home/craig/Dev/projects/carp/app/jni/src/../SDL/include/SDL_misc.h \
   /home/craig/Dev/projects/carp/app/jni/src/../SDL_image/SDL_image.h \
-  /home/craig/Dev/projects/carp/app/jni/SDL2_ttf/SDL_ttf.h \
+  /home/craig/Dev/projects/carp/app/jni/src/../SDL2_ttf/SDL_ttf.h \
+  /home/craig/Dev/projects/carp/app/jni/SDL2_mixer/include/SDL_mixer.h \
   /home/craig/Dev/projects/carp/app/jni/src/system.h \
   /home/craig/Dev/projects/carp/app/jni/src/render.h \
   /home/craig/Dev/projects/carp/app/jni/src/input.h \
   /home/craig/Dev/projects/carp/app/jni/src/background.h \
   /home/craig/Dev/projects/carp/app/jni/src/entity.h \
-  /home/craig/Dev/projects/carp/app/jni/src/ui.h
+  /home/craig/Dev/projects/carp/app/jni/src/ui.h \
+  /home/craig/Dev/projects/carp/app/jni/src/audio.h
 
 /home/craig/Dev/projects/carp/app/jni/src/game.h:
 
@@ -170,7 +172,9 @@
 
 /home/craig/Dev/projects/carp/app/jni/src/../SDL_image/SDL_image.h:
 
-/home/craig/Dev/projects/carp/app/jni/SDL2_ttf/SDL_ttf.h:
+/home/craig/Dev/projects/carp/app/jni/src/../SDL2_ttf/SDL_ttf.h:
+
+/home/craig/Dev/projects/carp/app/jni/SDL2_mixer/include/SDL_mixer.h:
 
 /home/craig/Dev/projects/carp/app/jni/src/system.h:
 
@@ -183,3 +187,5 @@
 /home/craig/Dev/projects/carp/app/jni/src/entity.h:
 
 /home/craig/Dev/projects/carp/app/jni/src/ui.h:
+
+/home/craig/Dev/projects/carp/app/jni/src/audio.h:

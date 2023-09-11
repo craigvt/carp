@@ -11,6 +11,7 @@ NDK_LIBS_OUT=/home/craig/Dev/projects/carp/app/build/intermediates/cxx/Debug/b47
 APP_PLATFORM=android-16
 SDL2
 SDL2_image
+SDL2_ttf
 main
 jvmArgs : 
 
