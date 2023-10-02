@@ -8,31 +8,79 @@ static struct Entity entity;
 
 void entity_init(void)
 {
-        entity.texture = IMG_LoadTexture(render_get_renderer(), "fish_atlas.png");
+        if (game_get_state() == TITLE || game_get_state() == GAMEOVER) {
 
-        for (int i = 0; i < MAX_FISH; i++) {
-                entity.fish_arr[i].active = false;
-                entity.fish_arr[i].id = i;
+                float scale = render_get_scale();
+                SDL_Rect bounds;
+                SDL_GetDisplayBounds(0, &bounds);
+
+                entity.display_turtles.texture = IMG_LoadTexture(render_get_renderer(), "display_turtles.png"); 
+                entity.display_turtles.src = (SDL_Rect){0, 0, 176, 16};
+                entity.display_turtles.dst = (SDL_Rect){bounds.w, 234 * scale, 176 * scale, 16 * scale};
+
+                entity.crab.texture = IMG_LoadTexture(render_get_renderer(), "crab.png"); 
+                entity.crab.src = (SDL_Rect){0, 0, CRAB_W, CRAB_H};
+                entity.crab.dst = (SDL_Rect){bounds.x - 500, 272 * scale, CRAB_W * scale, CRAB_H * scale};
         }
 
-        for (int i = 0; i < LANES; i++) {
-                entity.lanes[i].active = false;
-                entity.lanes[i].id = i;
-        }
+        if (game_get_state() == PLAY) {
+                entity.texture = IMG_LoadTexture(render_get_renderer(), "fish_atlas.png");
 
-        entity.fish_cap           = 16;
-        entity.fish_active        = 0;
-        entity.fish_spawn_rate    = 20;
-        entity.fish_spawn_timer   = 0;
-        entity.fish_caught        = 0;
-        entity.turtle_spawn_rate  = 30;
-        entity.turtle_spawn_timer = 0;
-        entity.turtle_active      = false;
-        entity.turtles_caught     = 0;
+                for (int i = 0; i < MAX_FISH; i++) {
+                        entity.fish_arr[i].active = false;
+                        entity.fish_arr[i].id = i;
+                }
+
+                for (int i = 0; i < LANES; i++) {
+                        entity.lanes[i].active = false;
+                        entity.lanes[i].id = i;
+                }
+
+                entity.fish_cap           = 16;
+                entity.fish_active        = 0;
+                entity.fish_spawn_rate    = 20;
+                entity.fish_spawn_timer   = 0;
+                entity.fish_caught        = 0;
+                entity.turtle_spawn_rate  = 30;
+                entity.turtle_spawn_timer = 0;
+                entity.turtle_active      = false;
+                entity.turtles_caught     = 0;
+                entity.end_state          = false;
+                entity.final_pass         = false;
+        }
 }
 
 void entity_update(void)
 {
+        float scale = render_get_scale();
+        SDL_Rect bounds;
+        SDL_GetDisplayBounds(0, &bounds);
+
+        if (game_get_state() == TITLE || game_get_state() == GAMEOVER) {      
+
+                entity.display_turtles.dst.x = entity.display_turtles.dst.x - 3;
+                entity.crab.dst.x = entity.crab.dst.x + 2;
+
+                if (game_get_keyframe() == 1) {
+                        entity.display_turtles.src.y = 0;
+                        entity.crab.src.x = 0;
+                }   
+
+                if (game_get_keyframe() == 2) {
+                        entity.display_turtles.src.y = 16;
+                        entity.crab.src.x = CRAB_W;
+                }
+
+                int w = entity.display_turtles.src.w * scale;
+                if (entity.display_turtles.dst.x <= bounds.x - w) {
+                        entity.display_turtles.dst.x = bounds.w;
+                }
+
+                if (entity.crab.dst.x >= bounds.w) {
+                        entity.crab.dst.x = bounds.x - 500;
+                }
+        }
+
         if (game_get_state() == PLAY) {
                 if (entity.turtles_caught < 3) {
                         entity_spawn_turtle();
@@ -40,9 +88,9 @@ void entity_update(void)
                         entity_update_turtle();
                         entity_update_fish();
                 }
-                if (entity.turtles_caught >= 3) {
+                if (entity.end_state) {
                         entity_end_state();
-                } 
+                }
         }   
 }
 
@@ -74,13 +122,25 @@ void entity_end_state(void)
                 entity.turtle_active = false;
         }
 
+        if (entity.final_pass) {
+                SDL_Delay(2000);
+                entity.end_state  = false;
+                entity.final_pass = false;
+                game_transition_out();
+        }
+
         if (entity.fish_active <= 0) {
-                game_set_new_state(4);
+                entity.final_pass = true;
         }
 }
 
 void entity_render(void)
 {
+        if (game_get_state() == TITLE || game_get_state() == GAMEOVER) {
+                SDL_RenderCopy(render_get_renderer(), entity.display_turtles.texture, &entity.display_turtles.src, &entity.display_turtles.dst);
+                SDL_RenderCopy(render_get_renderer(), entity.crab.texture, &entity.crab.src, &entity.crab.dst);
+        }
+
         if (game_get_state() == PLAY) {     
 
                 if (entity.turtle_active) {
@@ -97,20 +157,26 @@ void entity_render(void)
 
 void entity_destroy(void)
 {
-        SDL_DestroyTexture(entity.texture);
-
-        for (int i = 0; i < MAX_FISH; i++) {
-                entity.fish_arr[i].active    = false;
-                entity.fish_arr[i].id        = 0;
-                entity.fish_arr[i].type      = 0;
-                entity.fish_arr[i].direction = 0;
-                entity.fish_arr[i].speed     = 0;
-                entity.fish_arr[i].src       = (SDL_Rect){0, 0, 0, 0};
-                entity.fish_arr[i].dst       = (SDL_Rect){0, 0, 0, 0};
+        if (game_get_state() == TITLE) {
+                SDL_DestroyTexture(entity.display_turtles.texture);
         }
 
-        entity.turtle.src = (SDL_Rect){0, 0, 0, 0};
-        entity.turtle.dst = (SDL_Rect){0, 0, 0, 0};
+        if (game_get_state() == PLAY) {
+                SDL_DestroyTexture(entity.texture);
+
+                for (int i = 0; i < MAX_FISH; i++) {
+                        entity.fish_arr[i].active    = false;
+                        entity.fish_arr[i].id        = 0;
+                        entity.fish_arr[i].type      = 0;
+                        entity.fish_arr[i].direction = 0;
+                        entity.fish_arr[i].speed     = 0;
+                        entity.fish_arr[i].src       = (SDL_Rect){0, 0, 0, 0};
+                        entity.fish_arr[i].dst       = (SDL_Rect){0, 0, 0, 0};
+                }
+
+                entity.turtle.src = (SDL_Rect){0, 0, 0, 0};
+                entity.turtle.dst = (SDL_Rect){0, 0, 0, 0};
+        }
 }
 
 void entity_spawn_turtle(void)
@@ -140,6 +206,7 @@ void entity_spawn_turtle(void)
 
                 entity.turtle_active = true;
         }
+
 }
 
 void entity_update_turtle(void)
@@ -157,7 +224,7 @@ void entity_update_turtle(void)
                         if(collision) {
                                 audio_turtle_click();
                                 entity.turtle.dying = true;
-                                entity.turtle.death_count = 0;
+                                entity.turtle.death_count = 0; 
                         }
                 }
 
@@ -167,6 +234,11 @@ void entity_update_turtle(void)
                         if (entity.turtle.death_count > 3) {
                                 entity.turtle_active = false;
                                 entity.turtles_caught++;
+                                if (entity.turtles_caught >= 3) {
+                                        Mix_HaltMusic();
+                                        audio_play_end();
+                                        entity.end_state = true;
+                                }
                         }
                 }
 

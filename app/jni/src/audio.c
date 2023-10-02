@@ -23,31 +23,24 @@ void audio_init(void)
     }
 }
 
-void audio_manage_music(void)
+void audio_title_music(void)
 {
-    if (!audio.music_active) {
-        if (game_get_state() == TITLE) {
-            Mix_PlayMusic(audio.title_music, -1);
-            audio.music_active = true;
-        }
-
-        if (game_get_state() == PLAY) {           
-            Mix_PlayMusic(audio.play_music, -1);
-            audio.music_active = true;
-        }
-
-        if (game_get_state() == GAMEOVER) {
-            Mix_PlayMusic(audio.gameover_music, -1);
-            audio.music_active = true;
-        }
-    }
+    Mix_PlayMusic(audio.title_music, -1);
 }
 
-void audio_title_end(void)
+void audio_play_music(void)
+{
+    Mix_PlayMusic(audio.play_music, -1);
+}
+
+void audio_gameover_music(void)
+{
+    Mix_PlayMusic(audio.gameover_music, -1);
+}
+
+void audio_play_button(void)
 {
     Mix_PlayChannel(-1, audio.play_button, 0);
-
-    while (Mix_Playing(-1) != 0);
 }
 
 void audio_fish_click(void)
@@ -63,8 +56,6 @@ void audio_turtle_click(void)
 void audio_play_end(void)
 {
     Mix_PlayChannel(-1, audio.play_end, 0);
-
-    while (Mix_Playing(-1) != 0);  
 }
 
 void audio_destroy(void)
@@ -72,20 +63,15 @@ void audio_destroy(void)
     if (game_get_state() == TITLE) {
 	    Mix_FreeMusic(audio.title_music);
         Mix_FreeChunk(audio.play_button);
-        audio.music_active = false;
     }
-
     if (game_get_state() == PLAY) {
 	    Mix_FreeMusic(audio.play_music);
         Mix_FreeChunk(audio.fish_click);
         Mix_FreeChunk(audio.turtle_click);
         Mix_FreeChunk(audio.play_end);
-        audio.music_active = false;
     }
-
     if (game_get_state() == GAMEOVER) {
 	    Mix_FreeMusic(audio.gameover_music);
         Mix_FreeChunk(audio.play_button);
-        audio.music_active = false;
     }
 }

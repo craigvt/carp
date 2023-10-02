@@ -1,6 +1,7 @@
 #include "background.h"
 #include "render.h"
 #include "game.h"
+#include "lights.h"
 
 static struct Background background;
 
@@ -18,7 +19,7 @@ void background_init(void)
 
                 if (game_get_state() == TITLE) {
                         background.bg.texture = IMG_LoadTexture(render_get_renderer(), "title_bg.png");
-                        background.texture = IMG_LoadTexture(render_get_renderer(), "bg_atlas.png");    
+                        background.texture = IMG_LoadTexture(render_get_renderer(), "bg_atlas.png");
                 }
 
                 if (game_get_state() == PLAY) {
@@ -27,7 +28,7 @@ void background_init(void)
                 }
 
                 background.bg.src = (SDL_Rect){0, 0, PLAYBG_W, PLAYBG_H};
-                background.bg.dst = (SDL_Rect){- render_get_offset(), 0, PLAYBG_W * scale, PLAYBG_H * scale};
+                background.bg.dst = (SDL_Rect){-render_get_offset(), 0, PLAYBG_W * scale, PLAYBG_H * scale};
 
                 background.school1.src   = (SDL_Rect){0, 0, SCHOOL_W, SCHOOL_H};
                 background.school1.dst   = (SDL_Rect){0 - SCHOOL_W * scale, 48 * scale, SCHOOL_W * scale, SCHOOL_H * scale};
@@ -135,7 +136,7 @@ void background_update(void)
 void background_render(void)
 {       
         if (game_get_state() == LOGO) {
-                SDL_SetRenderDrawColor(render_get_renderer(), 68, 102, 166, 255);
+                SDL_SetRenderDrawColor(render_get_renderer(), 0, 0, 0, 255);
                 SDL_RenderFillRect(render_get_renderer(), &background.logo_bg.src);
         }
 

@@ -6,6 +6,7 @@
 #include "entity.h"
 #include "ui.h"
 #include "audio.h"
+#include "lights.h"
 
 static struct Game game;
 
@@ -24,17 +25,17 @@ void game_loop(void)
                 /* update */
                 background_update();
                 entity_update();
-                ui_update();         
+                ui_update(); 
+                game_transition_update();        
 
                 /* render */
                 SDL_RenderClear(render_get_renderer());
                 background_render();
+                lights_render();
                 entity_render(); 
-                ui_render();                     
+                ui_render();   
+                game_transition_render();                  
                 SDL_RenderPresent(render_get_renderer());
-
-                /* manage music */
-                audio_manage_music();
 
                 /* state check */
                 game_state_manager();
@@ -50,6 +51,13 @@ void game_loop(void)
 
 void game_init(void)
 {
+        SDL_Rect bounds;
+        SDL_GetDisplayBounds(0, &bounds);
+
+        game.transition.src = (SDL_Rect){bounds.x, bounds.y, bounds.w, bounds.h};
+        game.transition.out_active = false;
+        game.transition.in_active  = false;
+
         game.running = true;
         game.frame_count = 0;
         game.key_frame = 1;
@@ -103,39 +111,43 @@ void game_state_manager(void)
                                 ui_destroy();
                         }
                         game.state = TITLE;
+                        lights_init();
                         background_init();
+                        entity_init();
                         ui_init();
                         audio_init();
+                        game_transition_in();
                         break;
 
                 /* PLAY */
                 case 3:
                         if (game.state == GAMEOVER) {
-                                Mix_HaltMusic();
-                                audio_title_end();
+                                lights_destroy();
                                 background_destroy();
+                                entity_destroy();
                                 ui_destroy();
                                 audio_destroy();
                         }
                         if (game.state == TITLE) {
-                                Mix_HaltMusic();
-                                audio_title_end();
+                                lights_destroy();
                                 background_destroy();
+                                entity_destroy();
                                 ui_destroy();
                                 audio_destroy();
+                                lights_destroy();
                         }
                         game.state = PLAY;
+                        
                         background_init();
                         entity_init();
                         ui_init();
                         audio_init();
+                        game_transition_in();
                         break;
 
                 /* GAMEOVER */
                 case 4:
                         if (game.state == PLAY) {
-                                Mix_HaltMusic();
-                                audio_play_end();
                                 background_destroy();
                                 entity_destroy();
                                 ui_destroy();
@@ -143,8 +155,10 @@ void game_state_manager(void)
                         }
                         game.state = GAMEOVER;
                         background_init();
+                        entity_init();
                         ui_init();
                         audio_init();
+                        game_transition_in();
                         break;
                 }
         }
@@ -189,4 +203,77 @@ enum State game_get_state(void)
 int game_get_keyframe(void)
 {
         return game.key_frame;
+}
+
+void game_transition_update(void)
+{
+        if (game.transition.in_active) {            
+                game.transition.counter = game.transition.counter - 10;
+
+                if (game.transition.counter <= 0) { 
+                        game.transition.counter = 0;          
+                }     
+        }
+
+        if (game.transition.out_active) {
+                if (game_get_state() == LOGO) {
+                        game.transition.counter = game.transition.counter + 10;
+                        if (game.transition.counter >= 255) { 
+                                game.transition.counter = 255;
+                                game_set_new_state(2);
+                        }
+                }
+                if (game_get_state() == TITLE) {
+                        game.transition.counter = game.transition.counter + 6;
+                        if (game.transition.counter >= 255) { 
+                                game.transition.counter = 255;
+                                game_set_new_state(3);
+                        }
+                }
+                if (game_get_state() == PLAY) {
+                        game.transition.counter = game.transition.counter + 6;
+                        if (game.transition.counter >= 255) { 
+                                game.transition.counter = 255;
+                                game_set_new_state(4);
+                        }
+                }
+                if (game_get_state() == GAMEOVER) {
+                        game.transition.counter = game.transition.counter + 6;
+                        if (game.transition.counter >= 255) { 
+                                game.transition.counter = 255;
+                                game_set_new_state(3);
+                        }
+                }
+        }
+}
+
+void game_transition_render(void)
+{
+        if (game.transition.out_active || game.transition.in_active) {
+                SDL_SetRenderDrawColor(render_get_renderer(), 0, 0, 0, game.transition.counter);
+                SDL_RenderFillRect(render_get_renderer(), &game.transition.src);
+        }
+}
+
+void game_transition_in(void)
+{
+        game.transition.in_active = true;
+        game.transition.out_active = false;
+
+        if (game_get_state() == TITLE) {
+            audio_title_music();
+        }
+        if (game_get_state() == PLAY) {           
+            audio_play_music();
+        }
+        if (game_get_state() == GAMEOVER) {
+            audio_gameover_music();
+        }
+}
+
+void game_transition_out(void)
+{
+        game.transition.in_active = false;
+        game.transition.out_active = true;
+        Mix_HaltMusic();
 }

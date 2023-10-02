@@ -1,0 +1,2 @@
+C:\Dev\Projects\carp\app\jni\Android.mk
+C:\Dev\Projects\carp\app\jni\Application.mk

@@ -2,10 +2,10 @@
 
 #include "common.h"
 
-#define LOGO_W 112
-#define LOGO_H 48
-#define TITLE_W 144
-#define TITLE_H 96
+#define LOGO_W 96
+#define LOGO_H 64
+#define TITLE_W 128
+#define TITLE_H 112
 #define SCORE_W 180
 #define SCORE_H 32
 #define GAMEOVER_W 128

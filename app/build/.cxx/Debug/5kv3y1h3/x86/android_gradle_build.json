@@ -1,0 +1,201 @@
+{
+  "buildFiles": [
+    "C:\\Dev\\Projects\\carp\\app\\jni\\Android.mk",
+    "C:\\Dev\\Projects\\carp\\app\\jni\\Application.mk"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "C:\\Users\\craig\\AppData\\Local\\Android\\Sdk\\ndk\\21.4.7075529\\ndk-build.cmd",
+      "NDK_PROJECT_PATH\u003dnull",
+      "APP_BUILD_SCRIPT\u003dC:\\Dev\\Projects\\carp\\app\\jni\\Android.mk",
+      "NDK_APPLICATION_MK\u003dC:\\Dev\\Projects\\carp\\app\\jni\\Application.mk",
+      "APP_ABI\u003dx86",
+      "NDK_ALL_ABIS\u003dx86",
+      "NDK_DEBUG\u003d1",
+      "NDK_OUT\u003dC:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3/obj",
+      "NDK_LIBS_OUT\u003dC:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3/lib",
+      "APP_PLATFORM\u003dandroid-16",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "C:\\Users\\craig\\AppData\\Local\\Android\\Sdk\\ndk\\21.4.7075529\\ndk-build.cmd",
+    "NDK_PROJECT_PATH\u003dnull",
+    "APP_BUILD_SCRIPT\u003dC:\\Dev\\Projects\\carp\\app\\jni\\Android.mk",
+    "NDK_APPLICATION_MK\u003dC:\\Dev\\Projects\\carp\\app\\jni\\Application.mk",
+    "APP_ABI\u003dx86",
+    "NDK_ALL_ABIS\u003dx86",
+    "NDK_DEBUG\u003d1",
+    "NDK_OUT\u003dC:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3/obj",
+    "NDK_LIBS_OUT\u003dC:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3/lib",
+    "APP_PLATFORM\u003dandroid-16",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {
+    "SDL2-debug-x86": {
+      "buildCommandComponents": [
+        "C:\\Users\\craig\\AppData\\Local\\Android\\Sdk\\ndk\\21.4.7075529\\ndk-build.cmd",
+        "NDK_PROJECT_PATH\u003dnull",
+        "APP_BUILD_SCRIPT\u003dC:\\Dev\\Projects\\carp\\app\\jni\\Android.mk",
+        "NDK_APPLICATION_MK\u003dC:\\Dev\\Projects\\carp\\app\\jni\\Application.mk",
+        "APP_ABI\u003dx86",
+        "NDK_ALL_ABIS\u003dx86",
+        "NDK_DEBUG\u003d1",
+        "NDK_OUT\u003dC:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3/obj",
+        "NDK_LIBS_OUT\u003dC:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3/lib",
+        "APP_PLATFORM\u003dandroid-16",
+        "C:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3/obj/local/x86/libSDL2.so"
+      ],
+      "toolchain": "toolchain-x86",
+      "abi": "x86",
+      "artifactName": "SDL2",
+      "output": "C:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3\\obj\\local\\x86\\libSDL2.so"
+    },
+    "main-debug-x86": {
+      "buildCommandComponents": [
+        "C:\\Users\\craig\\AppData\\Local\\Android\\Sdk\\ndk\\21.4.7075529\\ndk-build.cmd",
+        "NDK_PROJECT_PATH\u003dnull",
+        "APP_BUILD_SCRIPT\u003dC:\\Dev\\Projects\\carp\\app\\jni\\Android.mk",
+        "NDK_APPLICATION_MK\u003dC:\\Dev\\Projects\\carp\\app\\jni\\Application.mk",
+        "APP_ABI\u003dx86",
+        "NDK_ALL_ABIS\u003dx86",
+        "NDK_DEBUG\u003d1",
+        "NDK_OUT\u003dC:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3/obj",
+        "NDK_LIBS_OUT\u003dC:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3/lib",
+        "APP_PLATFORM\u003dandroid-16",
+        "C:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3/obj/local/x86/libmain.so"
+      ],
+      "toolchain": "toolchain-x86",
+      "abi": "x86",
+      "artifactName": "main",
+      "output": "C:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3\\obj\\local\\x86\\libmain.so"
+    },
+    "SDL2_image-debug-x86": {
+      "buildCommandComponents": [
+        "C:\\Users\\craig\\AppData\\Local\\Android\\Sdk\\ndk\\21.4.7075529\\ndk-build.cmd",
+        "NDK_PROJECT_PATH\u003dnull",
+        "APP_BUILD_SCRIPT\u003dC:\\Dev\\Projects\\carp\\app\\jni\\Android.mk",
+        "NDK_APPLICATION_MK\u003dC:\\Dev\\Projects\\carp\\app\\jni\\Application.mk",
+        "APP_ABI\u003dx86",
+        "NDK_ALL_ABIS\u003dx86",
+        "NDK_DEBUG\u003d1",
+        "NDK_OUT\u003dC:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3/obj",
+        "NDK_LIBS_OUT\u003dC:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3/lib",
+        "APP_PLATFORM\u003dandroid-16",
+        "C:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3/obj/local/x86/libSDL2_image.so"
+      ],
+      "toolchain": "toolchain-x86",
+      "abi": "x86",
+      "artifactName": "SDL2_image",
+      "output": "C:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3\\obj\\local\\x86\\libSDL2_image.so"
+    },
+    "SDL2_ttf-debug-x86": {
+      "buildCommandComponents": [
+        "C:\\Users\\craig\\AppData\\Local\\Android\\Sdk\\ndk\\21.4.7075529\\ndk-build.cmd",
+        "NDK_PROJECT_PATH\u003dnull",
+        "APP_BUILD_SCRIPT\u003dC:\\Dev\\Projects\\carp\\app\\jni\\Android.mk",
+        "NDK_APPLICATION_MK\u003dC:\\Dev\\Projects\\carp\\app\\jni\\Application.mk",
+        "APP_ABI\u003dx86",
+        "NDK_ALL_ABIS\u003dx86",
+        "NDK_DEBUG\u003d1",
+        "NDK_OUT\u003dC:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3/obj",
+        "NDK_LIBS_OUT\u003dC:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3/lib",
+        "APP_PLATFORM\u003dandroid-16",
+        "C:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3/obj/local/x86/libSDL2_ttf.so"
+      ],
+      "toolchain": "toolchain-x86",
+      "abi": "x86",
+      "artifactName": "SDL2_ttf",
+      "output": "C:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3\\obj\\local\\x86\\libSDL2_ttf.so"
+    },
+    "harfbuzz-debug-x86": {
+      "buildCommandComponents": [
+        "C:\\Users\\craig\\AppData\\Local\\Android\\Sdk\\ndk\\21.4.7075529\\ndk-build.cmd",
+        "NDK_PROJECT_PATH\u003dnull",
+        "APP_BUILD_SCRIPT\u003dC:\\Dev\\Projects\\carp\\app\\jni\\Android.mk",
+        "NDK_APPLICATION_MK\u003dC:\\Dev\\Projects\\carp\\app\\jni\\Application.mk",
+        "APP_ABI\u003dx86",
+        "NDK_ALL_ABIS\u003dx86",
+        "NDK_DEBUG\u003d1",
+        "NDK_OUT\u003dC:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3/obj",
+        "NDK_LIBS_OUT\u003dC:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3/lib",
+        "APP_PLATFORM\u003dandroid-16",
+        "C:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3/obj/local/x86/libharfbuzz.a"
+      ],
+      "toolchain": "toolchain-x86",
+      "abi": "x86",
+      "artifactName": "harfbuzz",
+      "output": "C:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3\\obj\\local\\x86\\libharfbuzz.a"
+    },
+    "SDL2_mixer-debug-x86": {
+      "buildCommandComponents": [
+        "C:\\Users\\craig\\AppData\\Local\\Android\\Sdk\\ndk\\21.4.7075529\\ndk-build.cmd",
+        "NDK_PROJECT_PATH\u003dnull",
+        "APP_BUILD_SCRIPT\u003dC:\\Dev\\Projects\\carp\\app\\jni\\Android.mk",
+        "NDK_APPLICATION_MK\u003dC:\\Dev\\Projects\\carp\\app\\jni\\Application.mk",
+        "APP_ABI\u003dx86",
+        "NDK_ALL_ABIS\u003dx86",
+        "NDK_DEBUG\u003d1",
+        "NDK_OUT\u003dC:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3/obj",
+        "NDK_LIBS_OUT\u003dC:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3/lib",
+        "APP_PLATFORM\u003dandroid-16",
+        "C:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3/obj/local/x86/libSDL2_mixer.so"
+      ],
+      "toolchain": "toolchain-x86",
+      "abi": "x86",
+      "artifactName": "SDL2_mixer",
+      "output": "C:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3\\obj\\local\\x86\\libSDL2_mixer.so"
+    },
+    "cpufeatures-debug-x86": {
+      "buildCommandComponents": [
+        "C:\\Users\\craig\\AppData\\Local\\Android\\Sdk\\ndk\\21.4.7075529\\ndk-build.cmd",
+        "NDK_PROJECT_PATH\u003dnull",
+        "APP_BUILD_SCRIPT\u003dC:\\Dev\\Projects\\carp\\app\\jni\\Android.mk",
+        "NDK_APPLICATION_MK\u003dC:\\Dev\\Projects\\carp\\app\\jni\\Application.mk",
+        "APP_ABI\u003dx86",
+        "NDK_ALL_ABIS\u003dx86",
+        "NDK_DEBUG\u003d1",
+        "NDK_OUT\u003dC:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3/obj",
+        "NDK_LIBS_OUT\u003dC:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3/lib",
+        "APP_PLATFORM\u003dandroid-16",
+        "C:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3/obj/local/x86/libcpufeatures.a"
+      ],
+      "toolchain": "toolchain-x86",
+      "abi": "x86",
+      "artifactName": "cpufeatures",
+      "output": "C:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3\\obj\\local\\x86\\libcpufeatures.a"
+    },
+    "freetype-debug-x86": {
+      "buildCommandComponents": [
+        "C:\\Users\\craig\\AppData\\Local\\Android\\Sdk\\ndk\\21.4.7075529\\ndk-build.cmd",
+        "NDK_PROJECT_PATH\u003dnull",
+        "APP_BUILD_SCRIPT\u003dC:\\Dev\\Projects\\carp\\app\\jni\\Android.mk",
+        "NDK_APPLICATION_MK\u003dC:\\Dev\\Projects\\carp\\app\\jni\\Application.mk",
+        "APP_ABI\u003dx86",
+        "NDK_ALL_ABIS\u003dx86",
+        "NDK_DEBUG\u003d1",
+        "NDK_OUT\u003dC:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3/obj",
+        "NDK_LIBS_OUT\u003dC:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3/lib",
+        "APP_PLATFORM\u003dandroid-16",
+        "C:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3/obj/local/x86/libfreetype.a"
+      ],
+      "toolchain": "toolchain-x86",
+      "abi": "x86",
+      "artifactName": "freetype",
+      "output": "C:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3\\obj\\local\\x86\\libfreetype.a"
+    }
+  },
+  "toolchains": {
+    "toolchain-x86": {
+      "cCompilerExecutable": "C:\\Users\\craig\\AppData\\Local\\Android\\Sdk\\ndk\\21.4.7075529\\build\\..\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang.exe",
+      "cppCompilerExecutable": "C:\\Users\\craig\\AppData\\Local\\Android\\Sdk\\ndk\\21.4.7075529\\build\\..\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe"
+    }
+  },
+  "cFileExtensions": [
+    "c"
+  ],
+  "cppFileExtensions": [
+    "cc",
+    "cpp"
+  ]
+}

@@ -1,0 +1,201 @@
+{
+  "buildFiles": [
+    "C:\\Dev\\Projects\\carp\\app\\jni\\Android.mk",
+    "C:\\Dev\\Projects\\carp\\app\\jni\\Application.mk"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "C:\\Users\\craig\\AppData\\Local\\Android\\Sdk\\ndk\\21.4.7075529\\ndk-build.cmd",
+      "NDK_PROJECT_PATH\u003dnull",
+      "APP_BUILD_SCRIPT\u003dC:\\Dev\\Projects\\carp\\app\\jni\\Android.mk",
+      "NDK_APPLICATION_MK\u003dC:\\Dev\\Projects\\carp\\app\\jni\\Application.mk",
+      "APP_ABI\u003darmeabi-v7a",
+      "NDK_ALL_ABIS\u003darmeabi-v7a",
+      "NDK_DEBUG\u003d1",
+      "NDK_OUT\u003dC:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3/obj",
+      "NDK_LIBS_OUT\u003dC:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3/lib",
+      "APP_PLATFORM\u003dandroid-16",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "C:\\Users\\craig\\AppData\\Local\\Android\\Sdk\\ndk\\21.4.7075529\\ndk-build.cmd",
+    "NDK_PROJECT_PATH\u003dnull",
+    "APP_BUILD_SCRIPT\u003dC:\\Dev\\Projects\\carp\\app\\jni\\Android.mk",
+    "NDK_APPLICATION_MK\u003dC:\\Dev\\Projects\\carp\\app\\jni\\Application.mk",
+    "APP_ABI\u003darmeabi-v7a",
+    "NDK_ALL_ABIS\u003darmeabi-v7a",
+    "NDK_DEBUG\u003d1",
+    "NDK_OUT\u003dC:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3/obj",
+    "NDK_LIBS_OUT\u003dC:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3/lib",
+    "APP_PLATFORM\u003dandroid-16",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {
+    "SDL2_mixer-debug-armeabi-v7a": {
+      "buildCommandComponents": [
+        "C:\\Users\\craig\\AppData\\Local\\Android\\Sdk\\ndk\\21.4.7075529\\ndk-build.cmd",
+        "NDK_PROJECT_PATH\u003dnull",
+        "APP_BUILD_SCRIPT\u003dC:\\Dev\\Projects\\carp\\app\\jni\\Android.mk",
+        "NDK_APPLICATION_MK\u003dC:\\Dev\\Projects\\carp\\app\\jni\\Application.mk",
+        "APP_ABI\u003darmeabi-v7a",
+        "NDK_ALL_ABIS\u003darmeabi-v7a",
+        "NDK_DEBUG\u003d1",
+        "NDK_OUT\u003dC:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3/obj",
+        "NDK_LIBS_OUT\u003dC:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3/lib",
+        "APP_PLATFORM\u003dandroid-16",
+        "C:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3/obj/local/armeabi-v7a/libSDL2_mixer.so"
+      ],
+      "toolchain": "toolchain-armeabi-v7a",
+      "abi": "armeabi-v7a",
+      "artifactName": "SDL2_mixer",
+      "output": "C:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3\\obj\\local\\armeabi-v7a\\libSDL2_mixer.so"
+    },
+    "SDL2_image-debug-armeabi-v7a": {
+      "buildCommandComponents": [
+        "C:\\Users\\craig\\AppData\\Local\\Android\\Sdk\\ndk\\21.4.7075529\\ndk-build.cmd",
+        "NDK_PROJECT_PATH\u003dnull",
+        "APP_BUILD_SCRIPT\u003dC:\\Dev\\Projects\\carp\\app\\jni\\Android.mk",
+        "NDK_APPLICATION_MK\u003dC:\\Dev\\Projects\\carp\\app\\jni\\Application.mk",
+        "APP_ABI\u003darmeabi-v7a",
+        "NDK_ALL_ABIS\u003darmeabi-v7a",
+        "NDK_DEBUG\u003d1",
+        "NDK_OUT\u003dC:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3/obj",
+        "NDK_LIBS_OUT\u003dC:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3/lib",
+        "APP_PLATFORM\u003dandroid-16",
+        "C:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3/obj/local/armeabi-v7a/libSDL2_image.so"
+      ],
+      "toolchain": "toolchain-armeabi-v7a",
+      "abi": "armeabi-v7a",
+      "artifactName": "SDL2_image",
+      "output": "C:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3\\obj\\local\\armeabi-v7a\\libSDL2_image.so"
+    },
+    "SDL2_ttf-debug-armeabi-v7a": {
+      "buildCommandComponents": [
+        "C:\\Users\\craig\\AppData\\Local\\Android\\Sdk\\ndk\\21.4.7075529\\ndk-build.cmd",
+        "NDK_PROJECT_PATH\u003dnull",
+        "APP_BUILD_SCRIPT\u003dC:\\Dev\\Projects\\carp\\app\\jni\\Android.mk",
+        "NDK_APPLICATION_MK\u003dC:\\Dev\\Projects\\carp\\app\\jni\\Application.mk",
+        "APP_ABI\u003darmeabi-v7a",
+        "NDK_ALL_ABIS\u003darmeabi-v7a",
+        "NDK_DEBUG\u003d1",
+        "NDK_OUT\u003dC:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3/obj",
+        "NDK_LIBS_OUT\u003dC:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3/lib",
+        "APP_PLATFORM\u003dandroid-16",
+        "C:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3/obj/local/armeabi-v7a/libSDL2_ttf.so"
+      ],
+      "toolchain": "toolchain-armeabi-v7a",
+      "abi": "armeabi-v7a",
+      "artifactName": "SDL2_ttf",
+      "output": "C:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3\\obj\\local\\armeabi-v7a\\libSDL2_ttf.so"
+    },
+    "main-debug-armeabi-v7a": {
+      "buildCommandComponents": [
+        "C:\\Users\\craig\\AppData\\Local\\Android\\Sdk\\ndk\\21.4.7075529\\ndk-build.cmd",
+        "NDK_PROJECT_PATH\u003dnull",
+        "APP_BUILD_SCRIPT\u003dC:\\Dev\\Projects\\carp\\app\\jni\\Android.mk",
+        "NDK_APPLICATION_MK\u003dC:\\Dev\\Projects\\carp\\app\\jni\\Application.mk",
+        "APP_ABI\u003darmeabi-v7a",
+        "NDK_ALL_ABIS\u003darmeabi-v7a",
+        "NDK_DEBUG\u003d1",
+        "NDK_OUT\u003dC:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3/obj",
+        "NDK_LIBS_OUT\u003dC:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3/lib",
+        "APP_PLATFORM\u003dandroid-16",
+        "C:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3/obj/local/armeabi-v7a/libmain.so"
+      ],
+      "toolchain": "toolchain-armeabi-v7a",
+      "abi": "armeabi-v7a",
+      "artifactName": "main",
+      "output": "C:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3\\obj\\local\\armeabi-v7a\\libmain.so"
+    },
+    "SDL2-debug-armeabi-v7a": {
+      "buildCommandComponents": [
+        "C:\\Users\\craig\\AppData\\Local\\Android\\Sdk\\ndk\\21.4.7075529\\ndk-build.cmd",
+        "NDK_PROJECT_PATH\u003dnull",
+        "APP_BUILD_SCRIPT\u003dC:\\Dev\\Projects\\carp\\app\\jni\\Android.mk",
+        "NDK_APPLICATION_MK\u003dC:\\Dev\\Projects\\carp\\app\\jni\\Application.mk",
+        "APP_ABI\u003darmeabi-v7a",
+        "NDK_ALL_ABIS\u003darmeabi-v7a",
+        "NDK_DEBUG\u003d1",
+        "NDK_OUT\u003dC:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3/obj",
+        "NDK_LIBS_OUT\u003dC:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3/lib",
+        "APP_PLATFORM\u003dandroid-16",
+        "C:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3/obj/local/armeabi-v7a/libSDL2.so"
+      ],
+      "toolchain": "toolchain-armeabi-v7a",
+      "abi": "armeabi-v7a",
+      "artifactName": "SDL2",
+      "output": "C:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3\\obj\\local\\armeabi-v7a\\libSDL2.so"
+    },
+    "harfbuzz-debug-armeabi-v7a": {
+      "buildCommandComponents": [
+        "C:\\Users\\craig\\AppData\\Local\\Android\\Sdk\\ndk\\21.4.7075529\\ndk-build.cmd",
+        "NDK_PROJECT_PATH\u003dnull",
+        "APP_BUILD_SCRIPT\u003dC:\\Dev\\Projects\\carp\\app\\jni\\Android.mk",
+        "NDK_APPLICATION_MK\u003dC:\\Dev\\Projects\\carp\\app\\jni\\Application.mk",
+        "APP_ABI\u003darmeabi-v7a",
+        "NDK_ALL_ABIS\u003darmeabi-v7a",
+        "NDK_DEBUG\u003d1",
+        "NDK_OUT\u003dC:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3/obj",
+        "NDK_LIBS_OUT\u003dC:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3/lib",
+        "APP_PLATFORM\u003dandroid-16",
+        "C:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3/obj/local/armeabi-v7a/libharfbuzz.a"
+      ],
+      "toolchain": "toolchain-armeabi-v7a",
+      "abi": "armeabi-v7a",
+      "artifactName": "harfbuzz",
+      "output": "C:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3\\obj\\local\\armeabi-v7a\\libharfbuzz.a"
+    },
+    "freetype-debug-armeabi-v7a": {
+      "buildCommandComponents": [
+        "C:\\Users\\craig\\AppData\\Local\\Android\\Sdk\\ndk\\21.4.7075529\\ndk-build.cmd",
+        "NDK_PROJECT_PATH\u003dnull",
+        "APP_BUILD_SCRIPT\u003dC:\\Dev\\Projects\\carp\\app\\jni\\Android.mk",
+        "NDK_APPLICATION_MK\u003dC:\\Dev\\Projects\\carp\\app\\jni\\Application.mk",
+        "APP_ABI\u003darmeabi-v7a",
+        "NDK_ALL_ABIS\u003darmeabi-v7a",
+        "NDK_DEBUG\u003d1",
+        "NDK_OUT\u003dC:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3/obj",
+        "NDK_LIBS_OUT\u003dC:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3/lib",
+        "APP_PLATFORM\u003dandroid-16",
+        "C:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3/obj/local/armeabi-v7a/libfreetype.a"
+      ],
+      "toolchain": "toolchain-armeabi-v7a",
+      "abi": "armeabi-v7a",
+      "artifactName": "freetype",
+      "output": "C:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3\\obj\\local\\armeabi-v7a\\libfreetype.a"
+    },
+    "cpufeatures-debug-armeabi-v7a": {
+      "buildCommandComponents": [
+        "C:\\Users\\craig\\AppData\\Local\\Android\\Sdk\\ndk\\21.4.7075529\\ndk-build.cmd",
+        "NDK_PROJECT_PATH\u003dnull",
+        "APP_BUILD_SCRIPT\u003dC:\\Dev\\Projects\\carp\\app\\jni\\Android.mk",
+        "NDK_APPLICATION_MK\u003dC:\\Dev\\Projects\\carp\\app\\jni\\Application.mk",
+        "APP_ABI\u003darmeabi-v7a",
+        "NDK_ALL_ABIS\u003darmeabi-v7a",
+        "NDK_DEBUG\u003d1",
+        "NDK_OUT\u003dC:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3/obj",
+        "NDK_LIBS_OUT\u003dC:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3/lib",
+        "APP_PLATFORM\u003dandroid-16",
+        "C:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3/obj/local/armeabi-v7a/libcpufeatures.a"
+      ],
+      "toolchain": "toolchain-armeabi-v7a",
+      "abi": "armeabi-v7a",
+      "artifactName": "cpufeatures",
+      "output": "C:\\Dev\\Projects\\carp\\app\\build\\intermediates\\cxx\\Debug\\5kv3y1h3\\obj\\local\\armeabi-v7a\\libcpufeatures.a"
+    }
+  },
+  "toolchains": {
+    "toolchain-armeabi-v7a": {
+      "cCompilerExecutable": "C:\\Users\\craig\\AppData\\Local\\Android\\Sdk\\ndk\\21.4.7075529\\build\\..\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang.exe",
+      "cppCompilerExecutable": "C:\\Users\\craig\\AppData\\Local\\Android\\Sdk\\ndk\\21.4.7075529\\build\\..\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe"
+    }
+  },
+  "cFileExtensions": [
+    "c"
+  ],
+  "cppFileExtensions": [
+    "cc",
+    "cpp"
+  ]
+}

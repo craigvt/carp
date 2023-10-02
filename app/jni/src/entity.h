@@ -9,8 +9,22 @@
 #define FISH_H     16
 #define TURTLE_W   16
 #define TURTLE_H   16
+#define CRAB_W     16
+#define CRAB_H     16
 
 struct Entity {
+
+        struct display_turtles {
+                SDL_Rect src;
+                SDL_Rect dst;
+                SDL_Texture *texture;
+        } display_turtles;
+
+        struct crab {
+                SDL_Rect src;
+                SDL_Rect dst;
+                SDL_Texture *texture;
+        } crab;
 
         struct fish {
                 int death_count;
@@ -49,6 +63,8 @@ struct Entity {
         int turtle_spawn_timer;
         int turtle_spawn_rate;
         bool turtle_active;
+        bool end_state;
+        bool final_pass;
         struct lane lanes[LANES];
         struct fish fish_arr[MAX_FISH];
         SDL_Texture *texture;

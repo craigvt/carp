@@ -7,6 +7,7 @@ void render_init(void)
         render.window = SDL_CreateWindow("Carp", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, NATIVE_W, NATIVE_H, SDL_WINDOW_FULLSCREEN | SDL_WINDOW_OPENGL);
         render.renderer = SDL_CreateRenderer(render.window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_TARGETTEXTURE);
         SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
+        SDL_SetRenderDrawBlendMode(render.renderer, SDL_BLENDMODE_BLEND);
 }
 
 void render_destroy(void)
